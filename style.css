@@ -1,7 +1,7 @@
 
 :root {
-  --bg: #111;
-  --text: #fff;
+  --bg: #fff;
+  --text: #000;
   --glow: #00ff66;
   --font: "Helvetica Neue", Arial, sans-serif;
 }
@@ -21,8 +21,8 @@ header .btn {
   border-width: 1.5px;
   font-weight: 500;
   letter-spacing: 0.03em;
-  background: var(--bg) !important;
-  color: var(--text) !important;
+  background: var(--bg);
+  color: var(--text);
   position: relative;
 }
 
@@ -46,29 +46,37 @@ header .btn {
 
 /* Dropdown */
 .dropdown-menu {
-  background: var(--bg) !important;
+  background: transparent !important;
   border: none !important;
   box-shadow: none !important;
   border-radius: 0 !important;
 }
 
 .dropdown-item {
-  background: var(--bg) !important;
-  color: var(--text) !important;
+  background: #fff !important;
+  color: #000 !important;
   font-size: 1rem;
   border-radius: 2rem;
   margin: 0 auto;
   width: 90%;
-  box-shadow: 0 0 5px rgba(0,0,0,0.18);
+  box-shadow: 0 0 5px rgba(0,0,0,0.08);
   transition: box-shadow 0.3s, background 0.3s, color 0.3s;
   text-align: center;
+}
+.dropdown-item {
+  color: var(--text);
+  font-size: 1rem;
   padding: 0.75rem 1rem;
 }
 
 .dropdown-item:hover {
-  background: #222 !important;
-  color: #00ff66 !important;
-  box-shadow: 0 0 20px var(--glow);
+  background: #fff !important;
+  color: #000 !important;
+  box-shadow: 0 0 20px #00ff00;
+}
+.dropdown-item:hover {
+  background: var(--text);
+  color: var(--bg);
 }
 
 /* CAROUSEL FULLSCREEN */
