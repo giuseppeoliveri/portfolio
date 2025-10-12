@@ -1,0 +1,97 @@
+
+:root {
+  --bg: #fff;
+  --text: #000;
+  --glow: #00ff66;
+  --font: "Helvetica Neue", Arial, sans-serif;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  overflow: hidden;
+}
+
+/* HEADER */
+header .btn {
+  border-width: 1.5px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  background: var(--bg);
+  color: var(--text);
+  position: relative;
+}
+
+/* Glow verde intorno alla pillola */
+.glow-btn {
+  box-shadow:
+    0 0 5px var(--glow),
+    0 0 15px var(--glow),
+    0 0 30px var(--glow),
+    0 0 60px var(--glow);
+  transition: box-shadow 0.3s ease;
+}
+
+.glow-btn:hover {
+  box-shadow:
+    0 0 10px var(--glow),
+    0 0 20px var(--glow),
+    0 0 40px var(--glow),
+    0 0 80px var(--glow);
+}
+
+/* Dropdown */
+.dropdown-menu {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+.dropdown-item {
+  background: #fff !important;
+  color: #000 !important;
+  font-size: 1rem;
+  border-radius: 2rem;
+  margin: 0 auto;
+  width: 90%;
+  box-shadow: 0 0 5px rgba(0,0,0,0.08);
+  transition: box-shadow 0.3s, background 0.3s, color 0.3s;
+  text-align: center;
+}
+.dropdown-item {
+  color: var(--text);
+  font-size: 1rem;
+  padding: 0.75rem 1rem;
+}
+
+.dropdown-item:hover {
+  background: #fff !important;
+  color: #000 !important;
+  box-shadow: 0 0 20px #00ff00;
+}
+.dropdown-item:hover {
+  background: var(--text);
+  color: var(--bg);
+}
+
+/* CAROUSEL FULLSCREEN */
+.carousel-item img {
+  object-fit: contain;
+  width: 100vw;
+  height: 100vh;
+  background: var(--bg);
+  display: block;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  header .btn {
+    font-size: 1rem;
+    padding: 0.5rem 1.5rem;
+  }
+}
