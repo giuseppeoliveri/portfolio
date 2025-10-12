@@ -4,6 +4,30 @@ const imageFiles = ['Panettone.jpg', 'The_Blues.jpg'];
 // Glow dinamico: imposta il colore glow del bottone in base all'immagine sottostante
 // Richiede Color Thief: <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.2/color-thief.umd.js"></script>
 // ...existing code...
+
+// Animazione fluida dropdown custom
+document.addEventListener('DOMContentLoaded', function () {
+  const btn = document.getElementById('mainDropdownBtn');
+  const menu = btn?.parentElement?.querySelector('.dropdown-menu');
+  if (!btn || !menu) return;
+
+  // Disabilita Bootstrap toggle
+  btn.removeAttribute('data-bs-toggle');
+
+  btn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    menu.classList.toggle('show');
+    btn.setAttribute('aria-expanded', menu.classList.contains('show'));
+  });
+
+  // Chiudi dropdown cliccando fuori
+  document.addEventListener('click', function (e) {
+    if (menu.classList.contains('show')) {
+      menu.classList.remove('show');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  });
+});
 // Colori del glow per ogni immagine (corrispondenti agli index)
 const glowColors = ['#00ff66', '#3399ff'];
 
