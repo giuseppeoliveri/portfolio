@@ -72,31 +72,7 @@ document.documentElement.style.setProperty('--bg', '#000'); // sfondo pagina ini
 // Il glow resta sempre verde, non viene mai cambiato
 
 
-// === CENTRATURA ROBUSTA DELLA TENDINA ===
-// Alcuni browser/Bootstrap/Popper possono applicare stili inline. Per sicurezza, ricalcoliamo la posizione
-// quando la tendina è stata mostrata (shown.bs.dropdown) e quando la finestra cambia dimensione o scrolla.
-
-function positionDropdownCentered(dropdown) {
-  const btn = dropdown.querySelector('[data-bs-toggle="dropdown"]');
-  const menu = dropdown.querySelector('.dropdown-menu');
-  if (!btn || !menu) return;
-
-  // assicuriamoci che la menu sia visibile per poter calcolare le dimensioni
-  // Bootstrap aggiunge la classe .show; usiamo shown.bs.dropdown event per questo
-  const rect = btn.getBoundingClientRect();
-  const menuWidth = menu.offsetWidth;
-  // posizione in pagina (considera scroll)
-  const left = rect.left + (rect.width / 2) - (menuWidth / 2) + window.scrollX;
-  const top = rect.bottom + 8 + window.scrollY; // 8px gap
-
-  // Applica le coordinate in pixel (queste sovrascrivono gli inline di Popper)
-  menu.style.position = 'absolute';
-  menu.style.left = `${left}px`;
-  menu.style.top = `${top}px`;
-  menu.style.transform = 'none';
-  menu.style.right = 'auto';
-  // z-index già nel CSS
-}
+// ...existing code...
 
 // Applichiamo a tutti i dropdown nella pagina (ora ne abbiamo uno, ma è robusto)
 document.querySelectorAll('.dropdown').forEach(dropdown => {
