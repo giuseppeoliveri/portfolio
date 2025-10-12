@@ -4,7 +4,7 @@ const mediaFiles = [
   { type: 'image', src: 'The_Blues.jpg' },
   // Esempio video: aggiungi i tuoi video nella cartella immagini/
   // { type: 'video', src: 'esempio.mp4' }
-{ type: 'video', src: 'Giuseppe_Oliveri_Olivetti.mp4' } // Esempio video
+{ type: 'video', src: 'Giuseppe_Oliveri_Olivetti.mp4' } 
 ];
 
 const imageFolder = 'immagini/';
@@ -36,8 +36,8 @@ mediaFiles.forEach((file, index) => {
       if (video.duration > 7) video.currentTime = 0;
     };
     video.onplay = function() {
-      if (video.duration > 7) {
-        setTimeout(() => video.pause(), 7000);
+      if (video.duration > 60) {
+        setTimeout(() => video.pause(), 30000);
       }
     };
     div.appendChild(video);
