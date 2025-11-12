@@ -1,8 +1,6 @@
-
 :root {
   --bg: #fff;
   --text: #000;
-  --glow: #00ff66;
   --font: "Helvetica Neue", Arial, sans-serif;
 }
 
@@ -11,87 +9,101 @@ html, body {
   padding: 0;
   height: 100%;
   font-family: var(--font);
-  background: var(--bg);
-  color: var(--text);
+  background: var(--text); /* Sfondo pagina nero */
+  color: var(--bg);
   overflow: hidden;
 }
 
-/* HEADER */
-header .btn {
-  border-width: 1.5px;
+/* === HEADER A PILLOLA === */
+header {
+  z-index: 1030;
+}
+
+/* Il contenitore nero della pillola */
+.pill-nav {
+  background: var(--text);
+  border: 1px solid var(--bg); /* Bordo bianco sottile */
+  border-radius: 50px; /* Molto tondeggiante */
+  padding: 5px;
+  /* Abilita il wrapping su mobile */
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* I singoli link */
+.pill-nav-item {
+  font-family: var(--font);
   font-weight: 500;
   letter-spacing: 0.03em;
-  background: var(--bg);
-  color: var(--text);
-  position: relative;
+  text-decoration: none;
+  color: var(--bg); /* Testo bianco */
+  padding: 0.6rem 1.2rem;
+  border-radius: 50px; /* Forma a pillola */
+  transition: all 0.3s ease;
+  white-space: nowrap; /* Non manda a capo il testo del link */
 }
 
-/* Glow verde intorno alla pillola */
-.glow-btn {
-  box-shadow:
-    0 0 5px var(--glow),
-    0 0 15px var(--glow),
-    0 0 30px var(--glow),
-    0 0 60px var(--glow);
-  transition: box-shadow 0.3s ease;
+/* Il link "attivo" (pillola bianca) */
+.pill-nav-item.active {
+  background: var(--bg); /* Sfondo bianco */
+  color: var(--text);   /* Testo nero */
+  font-weight: 600;
 }
 
-.glow-btn:hover {
-  box-shadow:
-    0 0 10px var(--glow),
-    0 0 20px var(--glow),
-    0 0 40px var(--glow),
-    0 0 80px var(--glow);
+/* Effetto hover per i link non attivi */
+.pill-nav-item:not(.active):hover {
+  background: #333; /* Sfondo grigio scuro al passaggio */
 }
 
-/* Dropdown */
-.dropdown-menu {
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  border-radius: 0 !important;
-}
 
-.dropdown-item {
-  background: #fff !important;
-  color: #000 !important;
-  font-size: 1rem;
-  border-radius: 2rem;
-  margin: 0 auto;
-  width: 90%;
-  box-shadow: 0 0 5px rgba(0,0,0,0.08);
-  transition: box-shadow 0.3s, background 0.3s, color 0.3s;
-  text-align: center;
-}
-.dropdown-item {
-  color: var(--text);
-  font-size: 1rem;
-  padding: 0.75rem 1rem;
-}
-
-.dropdown-item:hover {
-  background: #fff !important;
-  color: #000 !important;
-  box-shadow: 0 0 20px #00ff00;
-}
-.dropdown-item:hover {
-  background: var(--text);
-  color: var(--bg);
-}
-
-/* CAROUSEL FULLSCREEN */
-.carousel-item img {
+/* === CAROUSEL FULLSCREEN === */
+.carousel-item img,
+.carousel-item video {
   object-fit: contain;
   width: 100vw;
   height: 100vh;
-  background: var(--bg);
+  background: var(--text); /* Sfondo nero fisso */
   display: block;
   margin: 0 auto;
 }
 
-@media (max-width: 768px) {
-  header .btn {
-    font-size: 1rem;
-    padding: 0.5rem 1.5rem;
+/* === MODAL "ABOUT" (Schermo intero) === */
+.about-modal-content {
+  background: var(--bg); /* Sfondo bianco */
+  color: var(--text);   /* Testo nero */
+  border: 0;
+  border-radius: 0;
+  /* Assicura che la nav-bar interna sia sopra */
+  position: relative; 
+}
+
+/* Testo "About" dentro il modal */
+.about-text-container {
+  text-align: left;
+  padding: 2rem;
+  font-weight: 500;
+}
+
+/* Animazione del modal (slide da sotto) */
+.modal.fade .modal-dialog {
+  transition: transform 0.4s ease-out;
+  transform: translateY(100%);
+}
+.modal.show .modal-dialog {
+  transform: translateY(0);
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 576px) {
+  /* Su mobile, riduci il padding dei link */
+  .pill-nav-item {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  /* Dimensione testo nel modal "About" */
+  .about-text-container .display-6 {
+    font-size: 1.75rem;
+    line-height: 1.4;
   }
 }
