@@ -543,7 +543,8 @@ header {
   justify-content: center;
   width: 44px;
   height: 44px;
-  color: #ffffff;
+  color: #ffffff !important;
+  /* Force white, override any defaults */
   text-decoration: none;
   font-size: 1.2rem;
   margin-top: 1rem;
@@ -555,10 +556,15 @@ header {
   transition: all 0.3s ease;
 }
 
+.linkedin-btn i {
+  color: #ffffff !important;
+  /* Force icon to be white */
+}
+
 .linkedin-btn:hover {
   background: rgba(255, 255, 255, 0.25);
   transform: scale(1.1);
-  color: #ffffff;
+  color: #ffffff !important;
 }
 
 @media (prefers-color-scheme: dark) {
