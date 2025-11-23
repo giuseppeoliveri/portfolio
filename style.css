@@ -290,28 +290,61 @@ header {
     transform: translateY(-1px);
   }
 
-  /* Dimensione testo nel modal "About" */
-  .about-text-container .display-6 {
-    font-size: 0.85rem !important;
-    /* Force smaller size */
-    line-height: 1.5;
-    text-align: center !important;
-    /* Force center alignment */
-  }
+  /* === REBUILT ABOUT MODAL FOR MOBILE === */
 
-  /* Add padding to prevent overlap with bottom header */
-  .about-text-container {
-    padding-bottom: 120px;
-    /* More space for the bottom header */
-    width: 75%;
-    /* Even narrower */
-    max-width: 280px;
-    margin: 0 auto;
+  /* 1. Ensure the modal body takes full height and scrolls */
+  .about-modal-content .modal-body {
+    height: 100dvh;
+    /* Use dynamic viewport height */
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    position: relative;
+  }
+
+  /* 2. Container for the text - Centered Box */
+  .about-text-container {
+    width: 85%;
+    /* Optimal width for reading on mobile */
+    max-width: 320px;
+    /* Cap it so it doesn't get too wide on larger phones */
+    margin: auto;
+    /* Center in the flex container */
+    padding-top: 80px;
+    /* Space from top */
+    padding-bottom: 120px;
+    /* Space for bottom nav */
+    flex-grow: 1;
+    /* Allow it to expand */
+    display: flex;
     align-items: center;
-    /* Force center alignment of children */
+    /* Vertically center the text block */
+  }
+
+  /* 3. The Text Itself - Clean and Readable */
+  .about-text-container .display-6 {
+    font-size: 1rem !important;
+    /* 16px is standard readable size */
+    line-height: 1.6;
+    /* Good breathing room */
+    text-align: center !important;
+    font-weight: 400;
+    /* Regular weight for body text */
+    margin: 0;
+  }
+
+  /* 4. Ensure the header stays fixed and visible */
+  header.position-fixed {
+    background: transparent;
+    /* Or blur if needed, but transparent is cleaner */
+    pointer-events: none;
+    /* Let clicks pass through to content if needed, but nav has pointer-events: auto */
+  }
+
+  header .container {
+    pointer-events: auto;
+    /* Re-enable clicks for nav */
   }
 
   /* Adjust carousel buttons on mobile */
