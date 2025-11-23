@@ -192,29 +192,37 @@ header {
 
   /* Adjust pill nav for mobile */
   .pill-nav {
-    padding: 8px 15px;
-    gap: 5px;
-    /* Ensure buttons are separate */
+    padding: 5px 10px;
+    gap: 2px;
+    /* Minimal gap to fit everything */
+    flex-wrap: nowrap;
+    /* Force single line */
+    width: 95%;
+    /* Ensure it doesn't touch edges */
+    max-width: 400px;
+    justify-content: space-between;
+    /* Distribute space */
   }
 
   /* Su mobile, riduci il padding dei link */
   .pill-nav-item {
-    padding: 0.6rem 1rem;
-    /* Consistent padding */
-    font-size: 1.2rem;
-    /* Base size */
+    padding: 0.5rem 0.6rem;
+    /* Reduced padding */
+    font-size: 1rem;
+    /* Slightly smaller text */
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    height: 44px;
-    /* Fixed height for buttons */
-    min-width: 44px;
-    /* Fixed width for icon buttons */
+    height: 40px;
+    /* Slightly smaller height */
+    min-width: 40px;
+    /* Slightly smaller width for icons */
+    white-space: nowrap;
   }
 
   /* Fix icon sizing specifically */
   .pill-nav-item i {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     /* Force consistent icon size */
     line-height: 1;
     display: block;
@@ -222,7 +230,7 @@ header {
 
   /* Specific fix for the mail icon */
   .bi-envelope {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     /* Match other icons */
     transform: translateY(-1px);
   }
