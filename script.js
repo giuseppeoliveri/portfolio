@@ -43,3 +43,32 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+// About Popup Toggle
+document.addEventListener('DOMContentLoaded', function () {
+    const aboutToggle = document.getElementById('aboutToggle');
+    const aboutToggleModal = document.getElementById('aboutToggleModal');
+    const aboutPopup = document.getElementById('aboutPopup');
+
+    function togglePopup(e) {
+        e.preventDefault();
+        aboutPopup.classList.toggle('active');
+    }
+
+    function closePopup(e) {
+        if (e.target === aboutPopup) {
+            aboutPopup.classList.remove('active');
+        }
+    }
+
+    if (aboutToggle) {
+        aboutToggle.addEventListener('click', togglePopup);
+    }
+
+    if (aboutToggleModal) {
+        aboutToggleModal.addEventListener('click', togglePopup);
+    }
+
+    // Close popup when clicking outside
+    aboutPopup.addEventListener('click', closePopup);
+});
