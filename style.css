@@ -271,9 +271,9 @@ header {
 
   /* Dimensione testo nel modal "About" */
   .about-text-container .display-6 {
-    font-size: clamp(1rem, 5vw, 1.3rem);
-    /* Fluid font size */
-    line-height: 1.5;
+    font-size: clamp(0.9rem, 4vw, 1.1rem);
+    /* Smaller fluid font size for mobile */
+    line-height: 1.4;
     text-align: left;
     /* Ensure left alignment on mobile too */
   }
