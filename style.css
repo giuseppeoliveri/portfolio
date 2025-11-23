@@ -481,7 +481,8 @@ header {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(0);
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.75);
+  /* Dark background for light mode */
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -506,14 +507,16 @@ header {
   font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 1rem;
-  color: var(--text);
+  color: #ffffff;
+  /* Always white for contrast */
 }
 
 .about-popup-content p {
   font-size: 0.95rem;
   line-height: 1.6;
   margin-bottom: 0.75rem;
-  color: var(--text);
+  color: #ffffff;
+  /* Always white for contrast */
 }
 
 .about-popup-content p:last-child {
@@ -526,6 +529,11 @@ header {
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.15);
   }
+
+  .about-popup-content h3,
+  .about-popup-content p {
+    color: #ffffff;
+  }
 }
 
 /* LinkedIn link in popup */
@@ -533,24 +541,27 @@ header {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  color: var(--text);
+  color: #ffffff;
+  /* White for contrast on dark popup */
   text-decoration: none;
   font-size: 0.95rem;
   margin-top: 1rem;
   padding: 0.5rem 1rem;
   border-radius: 20px;
-  background: rgba(0, 0, 0, 0.05);
+  background: rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
 }
 
 .linkedin-link:hover {
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.2);
   transform: translateY(-2px);
+  color: #ffffff;
 }
 
 @media (prefers-color-scheme: dark) {
   .linkedin-link {
     background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
   }
 
   .linkedin-link:hover {
