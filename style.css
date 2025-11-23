@@ -162,10 +162,22 @@ header {
   /* Sfondo bianco */
   color: var(--text);
   /* Testo nero */
-  border: 0;
+  border: none;
   border-radius: 0;
   /* Assicura che la nav-bar interna sia sopra */
   position: relative;
+  height: 100%;
+  /* Ensure full height */
+}
+
+.about-modal-content .modal-body {
+  overflow-y: auto;
+  /* Enable vertical scrolling */
+  height: 100%;
+  -webkit-overflow-scrolling: touch;
+  /* Smooth scroll on iOS */
+  padding-bottom: 0;
+  /* Remove padding here, handled by container */
 }
 
 /* Testo "About" dentro il modal */
