@@ -292,3 +292,32 @@ header {
     margin: 0 10px;
   }
 }
+
+/* === PROJECTS INDEX === */
+.project-list li {
+  margin-bottom: 1rem;
+}
+
+.project-link {
+  font-size: 1.5rem;
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 400;
+  transition: all 0.3s ease;
+  display: inline-block;
+  padding: 5px 15px;
+  border-radius: 50px;
+  border: 1px solid transparent;
+}
+
+.project-link:hover {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.1);
+  transform: translateX(10px);
+}
+
+@media (max-width: 576px) {
+  .project-link {
+    font-size: 1.2rem;
+  }
+}
