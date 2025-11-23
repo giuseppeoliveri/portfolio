@@ -293,31 +293,70 @@ header {
   }
 }
 
-/* === PROJECTS INDEX === */
-.project-list li {
-  margin-bottom: 1rem;
-}
-
-.project-link {
-  font-size: 1.5rem;
-  color: var(--text);
+/* === PROJECTS INDEX (GRID) === */
+.project-card {
+  display: block;
   text-decoration: none;
+  color: var(--text);
+  transition: transform 0.3s ease;
+  height: 100%;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+}
+
+.project-thumb {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  /* Square thumbnails */
+  background: rgba(0, 0, 0, 0.1);
+  /* Placeholder bg */
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  position: relative;
+
+  /* Liquid Glass Effect on Thumb */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.thumb-placeholder {
+  width: 100%;
+  height: 100%;
+  background: rgba(128, 128, 128, 0.2);
+  /* Gray placeholder */
+}
+
+/* If you have actual images */
+.project-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.project-card:hover .project-thumb img {
+  transform: scale(1.05);
+}
+
+.project-info {
+  text-align: center;
+}
+
+.project-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+  color: var(--text);
+}
+
+.project-cat {
+  font-size: 0.9rem;
+  color: rgba(0, 0, 0, 0.6);
+  /* Slightly muted text */
   font-weight: 400;
-  transition: all 0.3s ease;
-  display: inline-block;
-  padding: 5px 15px;
-  border-radius: 50px;
-  border: 1px solid transparent;
-}
-
-.project-link:hover {
-  background: rgba(0, 0, 0, 0.05);
-  border-color: rgba(0, 0, 0, 0.1);
-  transform: translateX(10px);
-}
-
-@media (max-width: 576px) {
-  .project-link {
-    font-size: 1.2rem;
-  }
+  margin: 0;
 }
