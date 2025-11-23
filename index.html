@@ -20,18 +20,18 @@
       <nav class="pill-nav d-inline-flex position-relative">
         <div class="nav-background"></div>
         <a href="#" class="pill-nav-item active">Giuseppe Oliveri</a>
+        <a href="#" class="pill-nav-item" data-bs-toggle="modal" data-bs-target="#projectsModal">
+          <i class="bi bi-grid-3x3-gap"></i>
+        </a>
         <a href="mailto:giuseppe@example.com" class="pill-nav-item">
-          <span class="d-none d-sm-inline">Mail</span>
-          <span class="d-inline d-sm-none"><i class="bi bi-envelope"></i></span>
+          <i class="bi bi-envelope"></i>
         </a>
         <a href="https://www.instagram.com/giuseppe_oli_/" target="_blank" rel="noopener noreferrer"
           class="pill-nav-item">
-          <span class="d-none d-sm-inline">Instagram</span>
-          <span class="d-inline d-sm-none"><i class="bi bi-instagram"></i></span>
+          <i class="bi bi-instagram"></i>
         </a>
         <a href="#" class="pill-nav-item" data-bs-toggle="modal" data-bs-target="#aboutModal">
-          <span class="d-none d-sm-inline">About</span>
-          <span class="d-inline d-sm-none"><i class="bi bi-info-circle"></i></span>
+          <i class="bi bi-info-circle"></i>
         </a>
       </nav>
     </div>
@@ -63,28 +63,99 @@
     </div>
   </main>
 
+  <div class="modal fade" id="projectsModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+      <div class="modal-content about-modal-content">
+        <div class="modal-body p-0 overflow-auto"> <!-- Allow scrolling -->
+
+          <header class="position-fixed top-0 start-0 w-100 py-3" style="z-index: 1040;">
+            <div class="container text-center">
+              <nav class="pill-nav d-inline-flex position-relative">
+                <div class="nav-background"></div>
+                <a href="#" class="pill-nav-item" data-bs-dismiss="modal">Giuseppe Oliveri</a>
+                <a href="#" class="pill-nav-item active">
+                  <i class="bi bi-grid-3x3-gap"></i>
+                </a>
+                <a href="mailto:giuseppe@example.com" class="pill-nav-item">
+                  <i class="bi bi-envelope"></i>
+                </a>
+                <a href="https://www.instagram.com/giuseppe_oli_/" target="_blank" rel="noopener noreferrer"
+                  class="pill-nav-item">
+                  <i class="bi bi-instagram"></i>
+                </a>
+                <a href="#" class="pill-nav-item" data-bs-toggle="modal" data-bs-target="#aboutModal">
+                  <i class="bi bi-info-circle"></i>
+                </a>
+              </nav>
+            </div>
+          </header>
+
+          <div class="container d-flex flex-column align-items-center justify-content-center min-vh-100 pt-5 pb-5">
+            <div class="col-lg-8 text-start w-100 mt-5">
+
+              <div class="project-category mb-5">
+                <h3 class="display-6 mb-4 fw-bold">Visual Identity / Logo</h3>
+                <ul class="list-unstyled project-list">
+                  <li><a href="#" class="project-link">Project Name 1</a></li>
+                  <li><a href="#" class="project-link">Project Name 2</a></li>
+                  <li><a href="#" class="project-link">Project Name 3</a></li>
+                </ul>
+              </div>
+
+              <div class="project-category mb-5">
+                <h3 class="display-6 mb-4 fw-bold">Motion Design</h3>
+                <ul class="list-unstyled project-list">
+                  <li><a href="#" class="project-link">Motion Project 1</a></li>
+                  <li><a href="#" class="project-link">Motion Project 2</a></li>
+                </ul>
+              </div>
+
+              <div class="project-category mb-5">
+                <h3 class="display-6 mb-4 fw-bold">Book Design</h3>
+                <ul class="list-unstyled project-list">
+                  <li><a href="#" class="project-link">Book Title 1</a></li>
+                  <li><a href="#" class="project-link">Book Title 2</a></li>
+                </ul>
+              </div>
+
+              <div class="project-category mb-5">
+                <h3 class="display-6 mb-4 fw-bold">Personal Project</h3>
+                <ul class="list-unstyled project-list">
+                  <li><a href="#" class="project-link">Personal Work 1</a></li>
+                  <li><a href="#" class="project-link">Personal Work 2</a></li>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="modal fade" id="aboutModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen">
       <div class="modal-content about-modal-content">
         <div class="modal-body p-0">
 
-          <header class="position-fixed top-0 start-0 w-100 py-3">
+          <header class="position-fixed top-0 start-0 w-100 py-3" style="z-index: 1040;">
             <div class="container text-center">
               <nav class="pill-nav d-inline-flex position-relative">
                 <div class="nav-background"></div>
                 <a href="#" class="pill-nav-item" data-bs-dismiss="modal">Giuseppe Oliveri</a>
+                <a href="#" class="pill-nav-item" data-bs-toggle="modal" data-bs-target="#projectsModal">
+                  <i class="bi bi-grid-3x3-gap"></i>
+                </a>
                 <a href="mailto:giuseppe@example.com" class="pill-nav-item">
-                  <span class="d-none d-sm-inline">Mail</span>
-                  <span class="d-inline d-sm-none"><i class="bi bi-envelope"></i></span>
+                  <i class="bi bi-envelope"></i>
                 </a>
                 <a href="https://www.instagram.com/giuseppe_oli_/" target="_blank" rel="noopener noreferrer"
                   class="pill-nav-item">
-                  <span class="d-none d-sm-inline">Instagram</span>
-                  <span class="d-inline d-sm-none"><i class="bi bi-instagram"></i></span>
+                  <i class="bi bi-instagram"></i>
                 </a>
                 <a href="#" class="pill-nav-item active">
-                  <span class="d-none d-sm-inline">About</span>
-                  <span class="d-inline d-sm-none"><i class="bi bi-info-circle"></i></span>
+                  <i class="bi bi-info-circle"></i>
                 </a>
               </nav>
             </div>
