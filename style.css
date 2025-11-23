@@ -105,18 +105,21 @@ header {
 
 
 /* === CAROUSEL FULLSCREEN === */
-.carousel-item img,
-.carousel-item video {
-  object-fit: cover;
-  /* Fill the screen */
-  width: 100vw;
+.carousel-item {
   height: 100vh;
   /* Fallback */
   height: 100dvh;
-  /* Mobile full screen */
-  background: var(--text);
+  /* Stable mobile height */
+  min-height: -webkit-fill-available;
+  /* iOS fix */
+}
+
+.carousel-item img,
+.carousel-item video {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
   display: block;
-  margin: 0 auto;
 }
 
 /* Update pill nav items for desktop icons */
