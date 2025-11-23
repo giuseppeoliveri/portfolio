@@ -360,3 +360,60 @@ header {
   font-weight: 400;
   margin: 0;
 }
+
+/* === DARK MODE SUPPORT === */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #000000;
+    --text: #ffffff;
+  }
+
+  /* Adjust navigation pill for dark mode */
+  .pill-nav {
+    background: rgba(255, 255, 255, 0.1);
+    /* Lighter glass on dark */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .nav-background {
+    background: rgba(255, 255, 255, 0.2);
+    /* More visible active state */
+  }
+
+  .pill-nav-item {
+    color: var(--text);
+  }
+
+  .pill-nav-item.active,
+  .pill-nav-item:hover {
+    color: #ffffff;
+    /* Ensure white text on active/hover */
+  }
+
+  /* Adjust carousel buttons for dark mode */
+  .carousel-control-prev,
+  .carousel-control-next {
+    background: rgba(255, 255, 255, 0.1);
+    /* Light glass on dark */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .carousel-control-prev:hover,
+  .carousel-control-next:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  /* Adjust project cards for dark mode */
+  .project-thumb {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .thumb-placeholder {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .project-cat {
+    color: rgba(255, 255, 255, 0.6);
+  }
+}
