@@ -237,11 +237,20 @@ header {
 
   /* Dimensione testo nel modal "About" */
   .about-text-container .display-6 {
-    font-size: 1.25rem;
-    /* Reduced from 1.75rem */
+    font-size: clamp(1rem, 5vw, 1.3rem);
+    /* Fluid font size */
     line-height: 1.5;
     text-align: left;
     /* Ensure left alignment on mobile too */
+  }
+
+  /* Add padding to prevent overlap with bottom header */
+  .about-text-container {
+    padding-bottom: 100px;
+    /* Space for the bottom header */
+    width: 90%;
+    /* Prevent text touching edges */
+    margin: 0 auto;
   }
 
   /* Adjust carousel buttons on mobile */

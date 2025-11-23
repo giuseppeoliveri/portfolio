@@ -68,15 +68,24 @@
       <div class="modal-content about-modal-content">
         <div class="modal-body p-0">
 
-          <header class="position-absolute top-0 start-0 w-100 py-3">
+          <header class="position-fixed top-0 start-0 w-100 py-3">
             <div class="container text-center">
               <nav class="pill-nav d-inline-flex position-relative">
                 <div class="nav-background"></div>
                 <a href="#" class="pill-nav-item" data-bs-dismiss="modal">Giuseppe Oliveri</a>
-                <a href="mailto:giuseppe@example.com" class="pill-nav-item">Mail</a>
+                <a href="mailto:giuseppe@example.com" class="pill-nav-item">
+                  <span class="d-none d-sm-inline">Mail</span>
+                  <span class="d-inline d-sm-none"><i class="bi bi-envelope"></i></span>
+                </a>
                 <a href="https://www.instagram.com/giuseppe_oli_/" target="_blank" rel="noopener noreferrer"
-                  class="pill-nav-item">Instagram</a>
-                <a href="#" class="pill-nav-item active">About</a>
+                  class="pill-nav-item">
+                  <span class="d-none d-sm-inline">Instagram</span>
+                  <span class="d-inline d-sm-none"><i class="bi bi-instagram"></i></span>
+                </a>
+                <a href="#" class="pill-nav-item active">
+                  <span class="d-none d-sm-inline">About</span>
+                  <span class="d-inline d-sm-none"><i class="bi bi-info-circle"></i></span>
+                </a>
               </nav>
             </div>
           </header>
