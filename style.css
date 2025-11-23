@@ -140,6 +140,12 @@ header {
   mix-blend-mode: difference;
 }
 
+/* More space for the name button */
+.pill-nav-item:first-child {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
 .pill-nav-item i {
   font-size: 1.2rem;
   line-height: 1;
