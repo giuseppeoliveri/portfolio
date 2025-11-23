@@ -280,25 +280,26 @@ header {
 
   /* Dimensione testo nel modal "About" */
   .about-text-container .display-6 {
-    font-size: 0.9rem;
-    /* Fixed small size */
-    line-height: 1.4;
-    text-align: center;
-    /* Center align on mobile */
+    font-size: 0.85rem !important;
+    /* Force smaller size */
+    line-height: 1.5;
+    text-align: center !important;
+    /* Force center alignment */
   }
 
   /* Add padding to prevent overlap with bottom header */
   .about-text-container {
-    padding-bottom: 100px;
-    width: 80%;
-    /* Narrower width */
-    max-width: 300px;
-    /* Max width for box effect */
+    padding-bottom: 120px;
+    /* More space for the bottom header */
+    width: 75%;
+    /* Even narrower */
+    max-width: 280px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* Center vertically if needed */
+    align-items: center;
+    /* Force center alignment of children */
   }
 
   /* Adjust carousel buttons on mobile */
