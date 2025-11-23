@@ -536,35 +536,38 @@ header {
   }
 }
 
-/* LinkedIn link in popup */
-.linkedin-link {
+/* LinkedIn button in popup */
+.linkedin-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
   color: #ffffff;
-  /* White for contrast on dark popup */
   text-decoration: none;
-  font-size: 0.95rem;
+  font-size: 1.2rem;
   margin-top: 1rem;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   transition: all 0.3s ease;
 }
 
-.linkedin-link:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px);
+.linkedin-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.1);
   color: #ffffff;
 }
 
 @media (prefers-color-scheme: dark) {
-  .linkedin-link {
+  .linkedin-btn {
     background: rgba(255, 255, 255, 0.1);
-    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.15);
   }
 
-  .linkedin-link:hover {
-    background: rgba(255, 255, 255, 0.15);
+  .linkedin-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
   }
 }
