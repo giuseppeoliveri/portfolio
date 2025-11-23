@@ -292,45 +292,39 @@ header {
 
   /* === REBUILT ABOUT MODAL FOR MOBILE === */
 
-  /* 1. Ensure the modal body takes full height and scrolls */
+  /* 1. Ensure the modal body takes full height */
   .about-modal-content .modal-body {
     height: 100dvh;
-    /* Use dynamic viewport height */
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+    overflow: hidden;
+    /* Disable scrolling as requested */
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    /* Center vertically */
     position: relative;
   }
 
-  /* 2. Container for the text - Centered Box */
+  /* 2. Container for the text */
   .about-text-container {
     width: 85%;
-    /* Optimal width for reading on mobile */
-    max-width: 320px;
-    /* Cap it so it doesn't get too wide on larger phones */
-    margin: auto;
-    /* Center in the flex container */
-    padding-top: 80px;
-    /* Space from top */
-    padding-bottom: 120px;
-    /* Space for bottom nav */
-    flex-grow: 1;
-    /* Allow it to expand */
+    max-width: 340px;
+    margin: 0 auto;
+    padding-top: 40px;
+    /* Space from top elements */
+    padding-bottom: 100px;
+    /* Space from bottom nav */
     display: flex;
     align-items: center;
-    /* Vertically center the text block */
   }
 
-  /* 3. The Text Itself - Clean and Readable */
+  /* 3. The Text Itself */
   .about-text-container .display-6 {
-    font-size: 1rem !important;
-    /* 16px is standard readable size */
-    line-height: 1.6;
-    /* Good breathing room */
-    text-align: center !important;
+    font-size: 0.95rem !important;
+    /* Slightly smaller to fit */
+    line-height: 1.5;
+    text-align: left !important;
+    /* Left aligned as requested */
     font-weight: 400;
-    /* Regular weight for body text */
     margin: 0;
   }
 
