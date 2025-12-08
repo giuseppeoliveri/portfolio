@@ -45,30 +45,70 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // About Popup Toggle
+// About Popup Toggle
 document.addEventListener('DOMContentLoaded', function () {
-    const aboutToggle = document.getElementById('aboutToggle');
-    const aboutToggleModal = document.getElementById('aboutToggleModal');
     const aboutPopup = document.getElementById('aboutPopup');
 
     function togglePopup(e) {
         e.preventDefault();
-        aboutPopup.classList.toggle('active');
-    }
-
-    function closePopup(e) {
-        if (e.target === aboutPopup) {
-            aboutPopup.classList.remove('active');
+        if (aboutPopup) {
+            aboutPopup.classList.toggle('active');
         }
     }
 
-    if (aboutToggle) {
-        aboutToggle.addEventListener('click', togglePopup);
+    // Use event delegation for buttons
+    document.addEventListener('click', function (e) {
+        const toggleBtn = e.target.closest('#aboutToggle') || e.target.closest('#aboutToggleModal');
+        if (toggleBtn) {
+            togglePopup(e);
+        }
+    });
+
+    // Close popup when clicking outside (on the backdrop)
+    if (aboutPopup) {
+        aboutPopup.addEventListener('click', function (e) {
+            // If clicking on the backdrop itself (not the card inside)
+            if (e.target === aboutPopup) {
+                aboutPopup.classList.remove('active');
+            }
+        });
+    }
+});
+
+// File Name Display Logic
+document.addEventListener('DOMContentLoaded', () => {
+    const carousel = document.getElementById('fullscreenCarousel');
+    const fileDisplay = document.getElementById('fileDisplay');
+
+    if (!carousel || !fileDisplay) return;
+
+    function updateFileName() {
+        // Find the active item
+        const activeItem = carousel.querySelector('.carousel-item.active');
+        if (!activeItem) return;
+
+        // Find img or video inside
+        const media = activeItem.querySelector('img, video');
+        if (!media) return;
+
+        // Get src and extract filename
+        const src = media.getAttribute('src');
+        if (!src) return;
+
+        // Extract filename from path (e.g. "immagini/Foto.jpg" -> "Foto.jpg")
+        const filename = src.split('/').pop();
+
+        // Optional: Remove extension if desired, but user asked for "nome del file"
+        // const cleanName = filename.split('.').slice(0, -1).join('.');
+
+        // Update text
+        fileDisplay.textContent = filename;
+        fileDisplay.classList.add('visible');
     }
 
-    if (aboutToggleModal) {
-        aboutToggleModal.addEventListener('click', togglePopup);
-    }
+    // Initial update
+    updateFileName();
 
-    // Close popup when clicking outside
-    aboutPopup.addEventListener('click', closePopup);
+    // Update on slide
+    carousel.addEventListener('slid.bs.carousel', updateFileName);
 });
