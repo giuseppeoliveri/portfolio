@@ -27,7 +27,7 @@ header {
 
 /* Il contenitore nero della pillola */
 .pill-nav {
-  background: rgba(0, 0, 0, 0.6);
+  background: #000000;
   /* Semi-transparent black */
   backdrop-filter: blur(20px);
   /* Liquid glass blur */
@@ -72,7 +72,7 @@ header {
   font-weight: 500;
   letter-spacing: 0.03em;
   text-decoration: none;
-  color: var(--bg);
+  color: #ffffff;
   /* Testo bianco */
   padding: 0.6rem 1.2rem;
   border-radius: 50px;
@@ -87,7 +87,7 @@ header {
 
 /* Il link "attivo" (gestito ora via JS per il background, ma teniamo lo stile del testo) */
 .pill-nav-item.active {
-  color: var(--bg);
+  color: #ffffff;
   /* Testo bianco come richiesto */
   font-weight: 600;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
@@ -96,7 +96,7 @@ header {
 
 /* Effetto hover per i link non attivi */
 .pill-nav-item:hover {
-  color: var(--bg);
+  color: #ffffff;
   /* Testo bianco */
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
   /* Ombra per leggibilità */
@@ -139,7 +139,6 @@ header {
   min-width: 44px;
   /* Ensure touch target size */
   height: 44px;
-  mix-blend-mode: difference;
 }
 
 /* More space for the name button */
@@ -437,7 +436,7 @@ header {
 
   /* Adjust navigation pill for dark mode */
   .pill-nav {
-    background: rgba(255, 255, 255, 0.1);
+    background: #000000;
     /* Lighter glass on dark */
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
@@ -448,7 +447,7 @@ header {
   }
 
   .pill-nav-item {
-    color: var(--text);
+    color: #ffffff;
   }
 
   .pill-nav-item.active,
