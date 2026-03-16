@@ -115,9 +115,12 @@ header {
 
 .carousel-item img,
 .carousel-item video {
-  object-fit: cover;
+  object-fit: contain;
   width: 100%;
   height: 100%;
+  padding: 100px 90px;
+  /* Margins for header, footers, and arrows */
+  box-sizing: border-box;
   display: block;
 }
 
@@ -243,6 +246,12 @@ header {
 
 /* === RESPONSIVE === */
 @media (max-width: 576px) {
+
+  .carousel-item img,
+  .carousel-item video {
+    padding: 100px 20px;
+    /* Less horizontal padding on mobile, keeps top/bottom space */
+  }
 
   /* Move header to bottom on mobile */
   header.position-fixed {
