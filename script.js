@@ -112,3 +112,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Update on slide
     carousel.addEventListener('slid.bs.carousel', updateFileName);
 });
+
+// Initialize Feather icons
+document.addEventListener('DOMContentLoaded', () => {
+    if (typeof feather !== 'undefined') {
+        feather.replace();
+    }
+});
