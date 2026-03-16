@@ -204,8 +204,8 @@ header {
 /* === CAROUSEL CONTROLS (Liquid Glass) === */
 .carousel-control-prev,
 .carousel-control-next {
-  width: 50px;
-  height: 50px;
+  width: 44px;
+  height: 44px;
   background: rgba(0, 0, 0, 0.5);
   /* Darker glass for better contrast on all backgrounds */
   backdrop-filter: blur(10px);
@@ -232,8 +232,8 @@ header {
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.25rem;
+  height: 1.25rem;
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
   /* Shadow on the icon itself for extra contrast */
 }
@@ -353,8 +353,8 @@ header {
   /* Adjust carousel buttons on mobile */
   .carousel-control-prev,
   .carousel-control-next {
-    width: 40px;
-    height: 40px;
+    width: 34px;
+    height: 34px;
     margin: 0 10px;
   }
 }
@@ -613,14 +613,14 @@ header {
   z-index: 1020;
   /* Below header (1030) but above carousel */
 
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: #000000;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 50px;
   padding: 0.5rem 1.5rem;
 
-  color: #fff;
+  color: #ffffff;
   font-family: var(--font);
   font-size: 0.9rem;
   font-weight: 400;
@@ -643,7 +643,6 @@ header {
     /* Position above the bottom nav */
     font-size: 0.8rem;
     padding: 0.4rem 1.2rem;
-    background: rgba(0, 0, 0, 0.3);
-    /* Slightly more transparent on mobile */
+    background: #000000;
   }
 }

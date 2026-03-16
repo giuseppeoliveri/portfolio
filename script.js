@@ -98,11 +98,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // Extract filename from path (e.g. "immagini/Foto.jpg" -> "Foto.jpg")
         const filename = src.split('/').pop();
 
-        // Optional: Remove extension if desired, but user asked for "nome del file"
-        // const cleanName = filename.split('.').slice(0, -1).join('.');
+        // Remove extension
+        const cleanName = filename.substring(0, filename.lastIndexOf('.')) || filename;
 
         // Update text
-        fileDisplay.textContent = filename;
+        fileDisplay.textContent = cleanName;
         fileDisplay.classList.add('visible');
     }
 
