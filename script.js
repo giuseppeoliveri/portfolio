@@ -377,3 +377,29 @@ function openProjectDetails(title, originalSrc) {
     }
     loadNextMedia();
 }
+
+// Theme Toggle Logic
+document.addEventListener('DOMContentLoaded', () => {
+    const toggleBtn = document.getElementById('themeToggleBtn');
+    const lightbulbIcon = document.getElementById('lightbulbIcon');
+    
+    if (toggleBtn) {
+        // Load preference from localStorage or default to dark
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        if (currentTheme === 'light') {
+            document.body.classList.add('light-mode');
+            if (lightbulbIcon) lightbulbIcon.setAttribute('fill', 'currentColor');
+        }
+
+        toggleBtn.addEventListener('click', () => {
+            const isLight = document.body.classList.toggle('light-mode');
+            if (isLight) {
+                if (lightbulbIcon) lightbulbIcon.setAttribute('fill', 'currentColor');
+                localStorage.setItem('theme', 'light');
+            } else {
+                if (lightbulbIcon) lightbulbIcon.setAttribute('fill', 'none');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+    }
+});
