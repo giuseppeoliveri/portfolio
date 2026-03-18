@@ -407,32 +407,36 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Fake Live Online Counter
+// Real Total Visits Counter (acting as online view)
 document.addEventListener('DOMContentLoaded', () => {
     const counterSpan = document.getElementById('onlineCountNumber');
     if (counterSpan) {
-        let count = sessionStorage.getItem('portfolioOnlineCount');
+        const hasCounted = sessionStorage.getItem('portfolioHasHit');
         
-        // Initialize if not exists
-        if (!count) {
-            count = Math.floor(Math.random() * 4) + 2; // Starts between 2 and 5
-            sessionStorage.setItem('portfolioOnlineCount', count);
-        } else {
-            count = parseInt(count);
+        // Se non ha ancora visitato in questa sessione, incrementa le views globali (+1)
+        // Altrimenti legge solo a che punto stanno per tutti gli altri
+        let endpoint = 'https://api.counterapi.dev/v1/giuseppeoliveri/statistiche_portfolio';
+        if (!hasCounted) {
+             endpoint += '/up';
+             sessionStorage.setItem('portfolioHasHit', 'true');
         }
         
-        counterSpan.innerText = count;
-        
-        setInterval(() => {
-            const chance = Math.random();
-            if (chance > 0.65) count += 1;
-            else if (chance < 0.25 && count > 1) count -= 1;
-            
-            if (count > 12) count -= 2;
-            if (count < 1) count = 1;
-            
-            counterSpan.innerText = count;
-            sessionStorage.setItem('portfolioOnlineCount', count);
-        }, Math.floor(Math.random() * 7000) + 5000);
+        // Per evitare che sia vuoto prima del fetch, mettiamo uno "0..." per rassicurare
+        counterSpan.innerText = "...";
+
+        fetch(endpoint)
+            .then(response => response.json())
+            .then(data => {
+                // Ritorna il count esatto globale delle persone che hanno cliccato il sito dalla sua storia
+                if(data && typeof data.count !== 'undefined') {
+                    // Simula il live: prendiamo le visite totali e per renderle "credibili" limitatamente al momento
+                    // Selezioniamo il numero reale. Se volessimo truccarlo, no. Lasciamolo vero.
+                    counterSpan.innerText = data.count;
+                }
+            })
+            .catch(err => {
+                console.error("Counter Fetch Fail:", err);
+                counterSpan.innerText = "1";
+            });
     }
 });
