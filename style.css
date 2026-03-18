@@ -667,10 +667,18 @@ header {
   .file-display {
     top: 30px;
     bottom: auto;
-    /* Position above the content */
     font-size: 0.8rem;
     padding: 0.4rem 1.2rem;
     background: #000000;
+    /* Center is roughly at 43px (30 + ~13) */
+  }
+
+  #themeToggleBtn {
+    top: 25px; /* Center at 43px: 25 + 18 */
+    right: 15px;
+    width: 36px;
+    height: 36px;
+    padding: 0;
   }
 }
 
