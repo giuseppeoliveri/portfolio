@@ -72,11 +72,11 @@ class CMSHandler(http.server.SimpleHTTPRequestHandler):
             proj_list = ""
             for p, c in projects.items():
                 proj_list += f'''
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  <div>
-                      <strong>{p}</strong> <span class="badge bg-secondary ms-2">{c}</span>
+                <li class="list-group-item d-flex flex-column flex-xl-row justify-content-between align-items-start align-items-xl-center gap-2">
+                  <div class="pe-2 text-wrap" style="word-break: break-word;">
+                      <strong>{p}</strong> <span class="badge bg-secondary ms-xl-2 mt-2 mt-xl-0 text-wrap">{c}</span>
                   </div>
-                  <div>
+                  <div class="d-flex gap-2 flex-shrink-0 mt-2 mt-xl-0">
                       <a href="/admin?edit={urllib.parse.quote(p)}" class="btn btn-sm btn-outline-dark">Modifica</a>
                       <form action="/delete" method="POST" class="d-inline" onsubmit="return confirm('Vuoi davvero eliminare questo progetto? L\\'azione cancellerà file e testi irrimediabilmente.');">
                           <input type="hidden" name="title" value="{p}">
@@ -100,14 +100,14 @@ class CMSHandler(http.server.SimpleHTTPRequestHandler):
                 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
             </head>
             <body class="bg-light p-4" style="background-color: #f8f9fa;">
-                <div class="row w-100 mx-auto" style="max-width: 1200px;">
+                <div class="row w-100 mx-auto gap-4 gap-md-0" style="max-width: 1300px;">
                     
                     <!-- LATO AGGIUNTA / MODIFICA -->
-                    <div class="col-md-7 mb-4">
-                        <div class="bg-white p-5 rounded-4 shadow-sm border border-light">
+                    <div class="col-lg-7 mb-4">
+                        <div class="bg-white p-4 p-md-5 rounded-4 shadow-sm border border-light">
                             <div class="text-center mb-5">
                                 <h2 class="fw-bold m-0">{form_title}</h2>
-                                <p class="text-muted">Il progetto verrà caricato o aggiornato nel sito.</p>
+                                <p class="text-muted mt-2">Il progetto verrà caricato o aggiornato nel sito.</p>
                                 {"<a href='/admin' class='btn btn-sm btn-warning mt-2'>Annulla Modifica e Torna ad Aggiungi Nuovo</a>" if is_edit else ""}
                             </div>
                             
@@ -151,7 +151,7 @@ class CMSHandler(http.server.SimpleHTTPRequestHandler):
                     </div>
                     
                     <!-- LATO LISTA PROGETTI -->
-                    <div class="col-md-5">
+                    <div class="col-lg-5">
                         <div class="bg-white p-4 rounded-4 shadow-sm border border-light sticky-top" style="top: 20px;">
                             <h4 class="fw-bold mb-4">Progetti Esistenti</h4>
                             <ul class="list-group list-group-flush border rounded">
@@ -295,7 +295,7 @@ class CMSHandler(http.server.SimpleHTTPRequestHandler):
                 self.wfile.write(f"Error: {e}".encode())
 
 
-with socketserver.TCPServer(("", PORT), CMSHandler) as httpd:
-    print(f"CMS Locale Attivo! Apri il browser a: http://localhost:{PORT}/admin")
-    webbrowser.open(f"http://localhost:{PORT}/admin")
+with socketserver.TCPServer(("127.0.0.1", PORT), CMSHandler) as httpd:
+    print(f"CMS Locale Attivo! Apri il browser a: http://127.0.0.1:{PORT}/admin")
+    webbrowser.open(f"http://127.0.0.1:{PORT}/admin")
     httpd.serve_forever()
