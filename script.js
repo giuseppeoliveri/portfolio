@@ -131,122 +131,249 @@ document.addEventListener('DOMContentLoaded', () => {
 // Build Projects Grid Dynamically
 document.addEventListener('DOMContentLoaded', () => {
     const gridContainer = document.getElementById('projectsGridContainer');
+    const filterNav = document.getElementById('categoryFilterNav');
     if (!gridContainer) return;
 
-    // Fetch the text file to map filenames to categories
     fetch('Info%20Immagini.txt')
         .then(response => {
             if (!response.ok) throw new Error("Could not load Info Immagini.txt");
             return response.text();
         })
         .then(text => {
-            // Parse text file
             const lines = text.split('\n').map(line => line.trim()).filter(line => line);
-            const categoryMap = {}; // { "Project Name": "Category" }
+            const categoryMap = {}; 
+            const allCategories = new Set();
             lines.forEach(line => {
                 const parts = line.split('->');
                 if (parts.length === 2) {
-                    categoryMap[parts[0].trim()] = parts[1].trim();
+                    const cat = parts[1].trim();
+                    categoryMap[parts[0].trim()] = cat;
+                    allCategories.add(cat);
                 }
             });
 
-            // Get projects from the carousel
-            const carouselLinks = document.querySelectorAll('#fullscreenCarousel .carousel-item img, #fullscreenCarousel .carousel-item video');
-            
-            // Group projects by category
-            const categories = {};
+            // Generate Filter Buttons if nav exists
+            if (filterNav) {
+                // Clear existing nav-background since we want individual backgrounds for multi-select
+                const navBg = filterNav.querySelector('.nav-background');
+                if(navBg) navBg.style.display = 'none';
 
-            carouselLinks.forEach((media, index) => {
-                const src = media.getAttribute('src');
-                if (!src) return;
-                
-                const filename = src.split('/').pop();
-                const title = filename.substring(0, filename.lastIndexOf('.')) || filename;
-                const isVideo = media.tagName === 'VIDEO';
-                
-                const category = categoryMap[title] || 'Uncategorized';
-                
-                if (!categories[category]) {
-                    categories[category] = [];
-                }
-                
-                categories[category].push({
-                    title: title,
-                    category: category,
-                    src: src,
-                    isVideo: isVideo,
-                    index: index
-                });
-            });
-
-            // Render categories and tiles
-            gridContainer.innerHTML = '';
-            
-            for (const [catName, projects] of Object.entries(categories)) {
-                // Category wrapper
-                const catDiv = document.createElement('div');
-                catDiv.className = 'project-category mb-5';
-                
-                const catTitle = document.createElement('h3');
-                catTitle.className = 'display-6 mb-4 fw-bold text-center';
-                catTitle.textContent = catName;
-                catDiv.appendChild(catTitle);
-                
-                const rowDiv = document.createElement('div');
-                rowDiv.className = 'row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4';
-                
-                projects.forEach(proj => {
-                    const colDiv = document.createElement('div');
-                    colDiv.className = 'col';
+                ["All", ...Array.from(allCategories)].forEach((cat, index) => {
+                    const btn = document.createElement('a');
+                    btn.href = "#";
+                    btn.className = 'pill-nav-item';
+                    if (index === 0) btn.classList.add('active'); // default ALL
+                    btn.textContent = cat;
+                    btn.dataset.category = cat;
                     
-                    let thumbContent = '';
-                    if (proj.isVideo) {
-                        thumbContent = `<video src="${proj.src}" muted playsinline autoplay loop></video>`;
-                    } else {
-                        thumbContent = `<img src="${proj.src}" alt="${proj.title}">`;
-                    }
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        if (cat === "All") {
+                            filterNav.querySelectorAll('.pill-nav-item').forEach(b => b.classList.remove('active'));
+                            btn.classList.add('active');
+                        } else {
+                            filterNav.querySelector('[data-category="All"]').classList.remove('active');
+                            btn.classList.toggle('active');
+                            if (filterNav.querySelectorAll('.pill-nav-item.active').length === 0) {
+                                filterNav.querySelector('[data-category="All"]').classList.add('active');
+                            }
+                        }
+                        filterProjects();
+                    });
                     
-                    colDiv.innerHTML = `
-                      <a href="#" class="project-card" data-carousel-index="${proj.index}">
-                        <div class="project-thumb">
-                          ${thumbContent}
-                        </div>
-                        <div class="project-info">
-                          <h4 class="project-title">${proj.title}</h4>
-                          <p class="project-cat">${proj.category}</p>
-                        </div>
-                      </a>
-                    `;
-                    rowDiv.appendChild(colDiv);
+                    filterNav.appendChild(btn);
                 });
-                
-                catDiv.appendChild(rowDiv);
-                gridContainer.appendChild(catDiv);
             }
 
-            // Add click listeners to project cards
-            const cards = gridContainer.querySelectorAll('.project-card');
-            cards.forEach(card => {
+            // Group projects by category and structure data
+            const carouselItems = document.querySelectorAll('#fullscreenCarousel .carousel-item');
+            const projectsData = [];
+
+            carouselItems.forEach((item, index) => {
+                const media = item.querySelector('img, video');
+                if (!media) return;
+
+                let src = media.getAttribute('src');
+                if (!src && media.tagName === 'VIDEO') {
+                    // Check for nested source tags
+                    const source = media.querySelector('source');
+                    if (source) src = source.getAttribute('src');
+                }
+                if (!src) return;
+                
+                // For the title, if it's the desktop version, we might want to strip " Desktop" so it matches Info Immagini.txt
+                let filename = src.split('/').pop();
+                let title = filename.substring(0, filename.lastIndexOf('.')) || filename;
+                if (title.toLowerCase().endsWith(' desktop')) {
+                    title = title.substring(0, title.length - 8);
+                }
+                
+                const isVideo = media.tagName === 'VIDEO';
+                const category = categoryMap[title] || 'Uncategorized';
+                
+                projectsData.push({ title, category, src, isVideo, index });
+            });
+
+            // Make a single grid layout
+            gridContainer.innerHTML = '';
+            const rowDiv = document.createElement('div');
+            rowDiv.className = 'row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4';
+            gridContainer.appendChild(rowDiv);
+
+            projectsData.forEach(proj => {
+                const colDiv = document.createElement('div');
+                colDiv.className = 'col project-col';
+                colDiv.dataset.category = proj.category;
+                
+                let thumbContent = proj.isVideo 
+                    ? `<video src="${proj.src}" muted playsinline autoplay loop></video>` 
+                    : `<img src="${proj.src}" alt="${proj.title}">`;
+                
+                colDiv.innerHTML = `
+                  <a href="#" class="project-card">
+                    <div class="project-thumb">
+                      ${thumbContent}
+                    </div>
+                    <div class="project-info">
+                      <h4 class="project-title">${proj.title}</h4>
+                      <p class="project-cat">${proj.category}</p>
+                    </div>
+                  </a>
+                `;
+                rowDiv.appendChild(colDiv);
+                
+                // Add click listener to open popup instead of sliding main carousel
+                const card = colDiv.querySelector('.project-card');
                 card.addEventListener('click', (e) => {
                     e.preventDefault();
-                    const index = parseInt(card.getAttribute('data-carousel-index'));
-                    
-                    // Hide the modal
-                    const modalEl = document.getElementById('projectsModal');
-                    const modalInstance = bootstrap.Modal.getInstance(modalEl);
-                    if (modalInstance) {
-                        modalInstance.hide();
-                    }
-                    
-                    // Go to the slide
-                    const carousel = document.getElementById('fullscreenCarousel');
-                    const bsCarousel = bootstrap.Carousel.getInstance(carousel) || new bootstrap.Carousel(carousel);
-                    bsCarousel.to(index);
+                    openProjectDetails(proj.title, proj.src);
                 });
             });
+
+            // Filter function
+            function filterProjects() {
+                if(!filterNav) return;
+                const activeFilters = Array.from(filterNav.querySelectorAll('.pill-nav-item.active')).map(b => b.dataset.category);
+                
+                rowDiv.querySelectorAll('.project-col').forEach(col => {
+                    if (activeFilters.includes("All") || activeFilters.includes(col.dataset.category)) {
+                        col.style.display = 'block';
+                    } else {
+                        col.style.display = 'none';
+                    }
+                });
+            }
         })
         .catch(err => {
             console.error("Error loading projects: ", err);
             gridContainer.innerHTML = '<p class="text-center">Could not load projects. Make sure viewing on a server, not locally via file://</p>';
         });
 });
+
+function openProjectDetails(title, originalSrc) {
+    const modalEl = document.getElementById('projectDetailsModal');
+    if (!modalEl) return;
+    
+    // We don't hide the background modal (if user is in the grid), we just open this on top 
+    // Wait, the grid IS inside projectsModal. So we are opening a modal over a modal. Usually allowed.
+    const bsModal = new bootstrap.Modal(modalEl);
+    
+    const contentDiv = document.getElementById('projectDetailsContent');
+    contentDiv.innerHTML = `
+      <h2 class="display-6 fw-bold mb-4">${title}</h2>
+      <div id="projectDetailsText" class="mb-4 text-start"></div>
+      <div id="projectDetailsMedia" class="d-flex flex-column gap-3 align-items-center">
+        <!-- Display original image/video as fallback or cover -->
+      </div>
+    `;
+    
+    bsModal.show();
+    
+    // Load testo.txt
+    fetch(`progetti/${encodeURIComponent(title)}/testo.txt`)
+        .then(res => {
+            if (!res.ok) throw new Error("No txt found");
+            return res.text();
+        })
+        .then(text => {
+            document.getElementById('projectDetailsText').innerHTML = `<p style="font-size: 1.1rem; line-height: 1.6;">${text}</p>`;
+        })
+        .catch(() => {
+            document.getElementById('projectDetailsText').innerHTML = `<p class="text-muted">Nessuna informazione aggiuntiva trovata qui, crea un file testo.txt nella cartella "progetti/${title}/" per aggiungere testo.</p>`;
+        });
+        
+    // Sequential fallback media loader for 1.jpg to X.jpg / .mp4
+    const mediaContainer = document.getElementById('projectDetailsMedia');
+    let index = 1;
+    let anyLoaded = false;
+    
+    function loadNextMedia() {
+        if (index > 15) {
+            if (!anyLoaded && originalSrc) {
+               // Load fallback original if nothing else exists
+               const ext = originalSrc.split('.').pop().toLowerCase();
+               if(ext === 'mp4' || ext === 'webm') {
+                   mediaContainer.innerHTML = `<video class="w-100 rounded shadow-sm" src="${originalSrc}" muted playsinline autoplay loop></video>`;
+               } else {
+                   mediaContainer.innerHTML = `<img class="w-100 rounded shadow-sm" src="${originalSrc}">`;
+               }
+            }
+            return;
+        }
+        
+        const extensions = ['.jpg', '.png', '.mp4'];
+        let extIdx = 0;
+        
+        function tryExtension() {
+            if (extIdx >= extensions.length) {
+                // Done trying all extensions for this index, 
+                // we assume no MORE images exist and we stop completely to prevent network 404 flooding.
+                if (!anyLoaded && originalSrc) {
+                   // Load fallback original if nothing else exists
+                   const ext = originalSrc.split('.').pop().toLowerCase();
+                   if(ext === 'mp4' || ext === 'webm') {
+                       mediaContainer.innerHTML = `<video class="w-100 rounded shadow-sm" src="${originalSrc}" muted playsinline autoplay loop></video>`;
+                   } else {
+                       mediaContainer.innerHTML = `<img class="w-100 rounded shadow-sm" src="${originalSrc}">`;
+                   }
+                }
+                return; 
+            }
+            
+            const ext = extensions[extIdx];
+            const url = `progetti/${encodeURIComponent(title)}/${index}${ext}`;
+            
+            if (ext === '.jpg' || ext === '.png') {
+                const img = new Image();
+                img.onload = () => {
+                    const el = document.createElement('img');
+                    el.src = url;
+                    el.className = 'w-100 rounded shadow-sm';
+                    mediaContainer.appendChild(el);
+                    anyLoaded = true;
+                    index++;
+                    loadNextMedia(); // Find next number
+                };
+                img.onerror = () => { extIdx++; tryExtension(); };
+                img.src = url;
+            } else if (ext === '.mp4') {
+                const video = document.createElement('video');
+                video.onloadedmetadata = () => {
+                    video.className = 'w-100 rounded shadow-sm';
+                    video.controls = true;
+                    video.autoplay = true;
+                    video.muted = true;
+                    video.loop = true;
+                    mediaContainer.appendChild(video);
+                    anyLoaded = true;
+                    index++;
+                    loadNextMedia();
+                };
+                video.onerror = () => { extIdx++; tryExtension(); };
+                video.src = url;
+            }
+        }
+        tryExtension();
+    }
+    loadNextMedia();
+}

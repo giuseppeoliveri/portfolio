@@ -94,6 +94,12 @@ header {
   /* Ombra per leggibilità */
 }
 
+/* Stile per i Category Filters Multipli */
+#categoryFilterNav .pill-nav-item.active {
+  background: rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff;
+}
+
 /* Effetto hover per i link non attivi */
 .pill-nav-item:hover {
   color: #ffffff;
