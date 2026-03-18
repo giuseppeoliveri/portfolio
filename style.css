@@ -709,6 +709,7 @@ body.light-mode .file-display:hover {
 
   /* Tap tooltip badge */
   #counterTapLabel {
+    display: block;
     position: fixed;
     top: 68px;
     left: 15px;
@@ -876,6 +877,11 @@ body.light-mode #themeToggleBtn:hover {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
   background: rgba(255, 255, 255, 1);
   border-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Hidden by default — shown only on mobile tap */
+#counterTapLabel {
+  display: none;
 }
 
 /* === ONLINE COUNTER === */
