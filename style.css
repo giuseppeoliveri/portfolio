@@ -680,6 +680,15 @@ header {
     height: 36px;
     padding: 0;
   }
+
+  #onlineCounter {
+    top: 25px;
+    left: 15px;
+    height: 36px;
+    padding: 0 12px;
+    font-size: 0.8rem;
+    gap: 6px;
+  }
 }
 
 /* === LIGHT MODE OVERRIDES === */
@@ -816,4 +825,50 @@ body.light-mode #themeToggleBtn {
   background: rgba(255,255,255,0.8);
   border: 1px solid rgba(0,0,0,0.1);
   color: #000;
+}
+
+/* === ONLINE COUNTER === */
+#onlineCounter {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1050;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 0 15px;
+  height: 44px;
+  border-radius: 50px;
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 400;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+body.light-mode #onlineCounter {
+  background: rgba(255,255,255,0.8);
+  border: 1px solid rgba(0,0,0,0.1);
+  color: #000000;
+}
+
+.blinking-icon {
+  animation: blink-green 3s infinite ease-in-out;
+}
+
+@keyframes blink-green {
+  0%, 100% { 
+    opacity: 1; 
+    stroke: #28a745; 
+    filter: drop-shadow(0 0 3px rgba(40, 167, 69, 0.8)); 
+  }
+  50% { 
+    opacity: 0.5; 
+    stroke: #28a745; 
+    filter: drop-shadow(0 0 0px rgba(40, 167, 69, 0)); 
+  }
 }

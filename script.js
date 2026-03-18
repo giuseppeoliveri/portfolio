@@ -406,3 +406,33 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// Fake Live Online Counter
+document.addEventListener('DOMContentLoaded', () => {
+    const counterSpan = document.getElementById('onlineCountNumber');
+    if (counterSpan) {
+        let count = sessionStorage.getItem('portfolioOnlineCount');
+        
+        // Initialize if not exists
+        if (!count) {
+            count = Math.floor(Math.random() * 4) + 2; // Starts between 2 and 5
+            sessionStorage.setItem('portfolioOnlineCount', count);
+        } else {
+            count = parseInt(count);
+        }
+        
+        counterSpan.innerText = count;
+        
+        setInterval(() => {
+            const chance = Math.random();
+            if (chance > 0.65) count += 1;
+            else if (chance < 0.25 && count > 1) count -= 1;
+            
+            if (count > 12) count -= 2;
+            if (count < 1) count = 1;
+            
+            counterSpan.innerText = count;
+            sessionStorage.setItem('portfolioOnlineCount', count);
+        }, Math.floor(Math.random() * 7000) + 5000);
+    }
+});
