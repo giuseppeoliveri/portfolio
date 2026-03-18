@@ -650,11 +650,22 @@ header {
   font-size: 0.9rem;
   font-weight: 400;
   letter-spacing: 0.05em;
-  pointer-events: none;
-  /* Let clicks pass through */
+  pointer-events: auto; /* Changed to auto so it can be clicked */
+  cursor: pointer; /* Suggest it is clickable */
 
   opacity: 0;
-  transition: opacity 0.5s ease;
+  transition: all 0.3s ease; /* changed from opacity 0.5s to all 0.3s to support hover scale */
+}
+
+.file-display:hover {
+  transform: translateX(-50%) scale(1.05);
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+body.light-mode .file-display:hover {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  border-color: rgba(0, 0, 0, 0.3);
 }
 
 .file-display.visible {

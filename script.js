@@ -115,6 +115,15 @@ document.addEventListener('DOMContentLoaded', () => {
         // Update text
         fileDisplay.textContent = cleanName;
         fileDisplay.classList.add('visible');
+        
+        // Add click integration to open modal
+        fileDisplay.onclick = function(e) {
+            e.preventDefault();
+            const originalSrc = media.getAttribute('src');
+            if (typeof openProjectDetails === 'function') {
+                openProjectDetails(cleanName, originalSrc);
+            }
+        };
     }
 
     // Initial update
