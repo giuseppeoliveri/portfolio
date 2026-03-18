@@ -872,8 +872,35 @@ body.light-mode #themeToggleBtn:hover {
   color: #ffffff;
   font-size: 0.9rem;
   font-weight: 400;
-  transition: all 0.3s ease;
-  pointer-events: none;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  pointer-events: auto;
+  cursor: default;
+  overflow: hidden;
+}
+
+#onlineCounter:hover {
+  background: rgba(0,0,0,0.7);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+body.light-mode #onlineCounter:hover {
+  background: rgba(255,255,255,1);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+}
+
+.counter-hover-text {
+  max-width: 0;
+  opacity: 0;
+  white-space: nowrap;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
+#onlineCounter:hover .counter-hover-text {
+  max-width: 120px;
+  opacity: 1;
+  margin-left: 2px;
 }
 
 body.light-mode #onlineCounter {

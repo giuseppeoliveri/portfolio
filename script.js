@@ -420,14 +420,17 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', () => {
     const counterSpan = document.getElementById('onlineCountNumber');
     if (counterSpan) {
-        const hasCounted = sessionStorage.getItem('portfolioHasHit');
+        // Calcola il mese corrente (es. "202603")
+        const currentMonthKey = new Date().toISOString().substring(0, 7).replace('-', '');
+        const sessionKey = 'portfolioHasHit_' + currentMonthKey;
+        const hasCounted = sessionStorage.getItem(sessionKey);
         
-        // Se non ha ancora visitato in questa sessione, incrementa le views globali (+1)
-        // Altrimenti legge solo a che punto stanno per tutti gli altri
-        let endpoint = 'https://api.counterapi.dev/v1/giuseppeoliveri/statistiche_portfolio';
+        // Se non ha ancora visitato in questa sessione questo mese, incrementa le views (+1)
+        // Usa una chiave univoca per mese, così il db parte da zero il primo giorno di ogni mese!
+        let endpoint = `https://api.counterapi.dev/v1/giuseppeoliveri/views_${currentMonthKey}`;
         if (!hasCounted) {
              endpoint += '/up';
-             sessionStorage.setItem('portfolioHasHit', 'true');
+             sessionStorage.setItem(sessionKey, 'true');
         }
         
         // Per evitare che sia vuoto prima del fetch, mettiamo uno "0..." per rassicurare
@@ -436,10 +439,7 @@ document.addEventListener('DOMContentLoaded', () => {
         fetch(endpoint)
             .then(response => response.json())
             .then(data => {
-                // Ritorna il count esatto globale delle persone che hanno cliccato il sito dalla sua storia
                 if(data && typeof data.count !== 'undefined') {
-                    // Simula il live: prendiamo le visite totali e per renderle "credibili" limitatamente al momento
-                    // Selezioniamo il numero reale. Se volessimo truccarlo, no. Lasciamolo vero.
                     counterSpan.innerText = data.count;
                 }
             })
