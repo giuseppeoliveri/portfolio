@@ -659,6 +659,7 @@ header {
 
 .file-display.visible {
   opacity: 1;
+  white-space: nowrap;
 }
 
 /* Mobile adjustments */

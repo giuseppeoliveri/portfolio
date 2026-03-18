@@ -107,7 +107,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const filename = src.split('/').pop();
 
         // Remove extension
-        const cleanName = filename.substring(0, filename.lastIndexOf('.')) || filename;
+        let cleanName = filename.substring(0, filename.lastIndexOf('.')) || filename;
+        if (cleanName.toLowerCase().endsWith(' desktop')) {
+            cleanName = cleanName.substring(0, cleanName.length - 8);
+        }
 
         // Update text
         fileDisplay.textContent = cleanName;
