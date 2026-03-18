@@ -696,9 +696,11 @@ body.light-mode .file-display:hover {
     top: 25px;
     left: 15px;
     height: 36px;
-    padding: 0 12px;
-    font-size: 0.8rem;
-    gap: 6px;
+    min-width: 36px;
+    padding: 0 10px;
+    font-size: 0.85rem;
+    gap: 5px;
+    justify-content: center;
   }
 }
 
