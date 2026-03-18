@@ -676,16 +676,15 @@ body.light-mode .file-display:hover {
 /* Mobile adjustments */
 @media (max-width: 576px) {
   .file-display {
-    top: 30px;
+    top: 27px;    /* matches center of eye icon and lightbulb (43px) */
     bottom: auto;
     font-size: 0.8rem;
     padding: 0.4rem 1.2rem;
     background: #000000;
-    /* Center is roughly at 43px (30 + ~13) */
   }
 
   #themeToggleBtn {
-    top: 25px; /* Center at 43px: 25 + 18 */
+    top: 25px;
     right: 15px;
     width: 36px;
     height: 36px;
@@ -701,6 +700,32 @@ body.light-mode .file-display:hover {
     font-size: 0.85rem;
     gap: 5px;
     justify-content: center;
+  }
+
+  /* On mobile: never expand text on hover — only on tap via JS */
+  #onlineCounter .counter-hover-text {
+    display: none;
+  }
+
+  /* Tap tooltip badge */
+  #counterTapLabel {
+    position: fixed;
+    top: 68px;
+    left: 15px;
+    background: rgba(0,0,0,0.75);
+    color: #fff;
+    font-size: 0.75rem;
+    padding: 4px 12px;
+    border-radius: 20px;
+    z-index: 1060;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  #counterTapLabel.visible {
+    opacity: 1;
   }
 }
 

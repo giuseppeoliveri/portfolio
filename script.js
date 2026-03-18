@@ -447,5 +447,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error("Counter Fetch Fail:", err);
                 counterSpan.innerText = "1";
             });
+
+        // Mobile tap: show label briefly
+        const tapLabel = document.getElementById('counterTapLabel');
+        if (tapLabel) {
+            document.getElementById('onlineCounter').addEventListener('click', () => {
+                tapLabel.classList.add('visible');
+                clearTimeout(tapLabel._hideTimeout);
+                tapLabel._hideTimeout = setTimeout(() => tapLabel.classList.remove('visible'), 2000);
+            });
+        }
     }
 });
