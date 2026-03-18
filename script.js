@@ -82,6 +82,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!carousel || !fileDisplay) return;
 
+    // Randomize starting slide
+    const items = carousel.querySelectorAll('.carousel-item');
+    if (items.length > 0) {
+        items.forEach(item => item.classList.remove('active'));
+        const randomIndex = Math.floor(Math.random() * items.length);
+        items[randomIndex].classList.add('active');
+    }
+
     function updateFileName() {
         // Find the active item
         const activeItem = carousel.querySelector('.carousel-item.active');
