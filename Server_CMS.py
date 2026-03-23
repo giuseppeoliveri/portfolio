@@ -5,11 +5,42 @@ import os
 import subprocess
 import webbrowser
 import urllib.parse
-import shutil
 import glob
+import os
+import shutil
 
 PORT = 8000
 DIRECTORY = os.getcwd()
+
+def update_index_html_add(title, ext):
+    if not os.path.exists('index.html'): return
+    with open('index.html', 'r', encoding='utf-8') as f:
+        content = f.read()
+    if f"immagini/{title}{ext}" in content:
+        return
+    if ext.lower() in ['.mp4', '.webm', '.mov']:
+        block = f'\n        <div class="carousel-item">\n          <video src="immagini/{title}{ext}" class="d-block w-100" style="background-color: #000;" muted playsinline autoplay loop></video>\n        </div>'
+    else:
+        block = f'\n        <div class="carousel-item">\n          <img src="immagini/{title}{ext}" class="d-block w-100" style="background-color: #000; object-fit: contain; max-height: 100%;">\n        </div>'
+    content = content.replace('<div class="carousel-inner">', f'<div class="carousel-inner">{block}')
+    with open('index.html', 'w', encoding='utf-8') as f:
+        f.write(content)
+
+def update_index_html_remove(title):
+    if not os.path.exists('index.html'): return
+    with open('index.html', 'r', encoding='utf-8') as f:
+        content = f.read()
+    idx = content.find(f"immagini/{title}.")
+    if idx == -1: return
+    start = content.rfind('<div class="carousel-item"', 0, idx)
+    end = content.find('</div>', idx)
+    if start != -1 and end != -1:
+        leading_space_start = content.rfind('\n', 0, start)
+        if leading_space_start != -1 and content[leading_space_start+1:start].isspace():
+            start = leading_space_start
+        content = content[:start] + content[end+6:]
+    with open('index.html', 'w', encoding='utf-8') as f:
+        f.write(content)
 
 def read_projects():
     projects = {}
@@ -200,12 +231,14 @@ class CMSHandler(http.server.SimpleHTTPRequestHandler):
                 if getattr(main_fileitem, 'filename', None):
                     # If edit, we probably want to delete the old main file first to avoid dupes of different extension.
                     if is_edit:
+                        update_index_html_remove(title)
                         for f in glob.glob(f"immagini/{title}.*"):
                             os.remove(f)
                     ext = os.path.splitext(main_fileitem.filename)[1]
                     dest_main = os.path.join('immagini', title + ext)
                     with open(dest_main, 'wb') as f:
                         f.write(main_fileitem.file.read())
+                    update_index_html_add(title, ext)
                 
                 # 3. Create or Update Progetti Folder
                 proj_dir = os.path.join('progetti', title)
@@ -277,6 +310,7 @@ class CMSHandler(http.server.SimpleHTTPRequestHandler):
                 # Delete main imagery
                 for f in glob.glob(f"immagini/{title}.*"):
                     os.remove(f)
+                update_index_html_remove(title)
                     
                 # Delete folder
                 proj_dir = os.path.join('progetti', title)
