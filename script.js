@@ -309,8 +309,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 colDiv.dataset.category = proj.category;
                 
                 let thumbContent = proj.isVideo 
-                    ? `<video src="${proj.src}" muted playsinline autoplay loop></video>` 
-                    : `<img src="${proj.src}" alt="${proj.title}">`;
+                    ? `<video src="${proj.src}" muted playsinline loop preload="metadata" style="object-fit:cover; width:100%; height:100%;"></video>` 
+                    : `<img src="${proj.src}" alt="${proj.title}" style="object-fit:cover; width:100%; height:100%;">`;
                 
                 colDiv.innerHTML = `
                   <a href="#" class="project-card">
@@ -331,6 +331,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     e.preventDefault();
                     openProjectDetails(proj.title, proj.src);
                 });
+
+                // Play video only on hover
+                if (proj.isVideo) {
+                    const videoEl = card.querySelector('video');
+                    if (videoEl) {
+                        card.addEventListener('mouseenter', () => {
+                            videoEl.play().catch(e => console.log("Hover play prevented", e));
+                        });
+                        card.addEventListener('mouseleave', () => {
+                            videoEl.pause();
+                        });
+                    }
+                }
             });
 
             // Filter function
