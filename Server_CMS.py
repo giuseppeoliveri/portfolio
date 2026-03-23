@@ -188,6 +188,8 @@ class CMSHandler(http.server.SimpleHTTPRequestHandler):
                     category = custom_category
 
                 main_fileitem = form['main_file']
+                if isinstance(main_fileitem, list):
+                    main_fileitem = main_fileitem[0]
                 
                 # 1. Update Map
                 projects = read_projects()
@@ -195,7 +197,7 @@ class CMSHandler(http.server.SimpleHTTPRequestHandler):
                 write_projects(projects)
                 
                 # 2. Maintain or Copy Main File
-                if main_fileitem.filename:
+                if getattr(main_fileitem, 'filename', None):
                     # If edit, we probably want to delete the old main file first to avoid dupes of different extension.
                     if is_edit:
                         for f in glob.glob(f"immagini/{title}.*"):
@@ -213,19 +215,25 @@ class CMSHandler(http.server.SimpleHTTPRequestHandler):
                     f.write(description)
                     
                 # 4. Handle Extra Files
-                if 'extra_files' in form and form['extra_files'].filename:
-                    # If editing and we selected new files, maybe delete old 1.jpg, 2.mp4 ?
-                    if is_edit:
-                        for f in os.listdir(proj_dir):
-                            if f != 'testo.txt':
-                                os.remove(os.path.join(proj_dir, f))
-                                
+                if 'extra_files' in form:
                     items = form['extra_files']
                     if not isinstance(items, list):
                         items = [items]
-                    index = 1
-                    for item in items:
-                        if hasattr(item, 'filename') and item.filename:
+                        
+                    valid_files = [i for i in items if hasattr(i, 'filename') and i.filename]
+                    
+                    if valid_files:
+                        # If editing and we selected new files, maybe delete old 1.jpg, 2.mp4 ?
+                        if is_edit:
+                            for f in os.listdir(proj_dir):
+                                if f != 'testo.txt':
+                                    try:
+                                        os.remove(os.path.join(proj_dir, f))
+                                    except Exception:
+                                        pass
+                                        
+                        index = 1
+                        for item in valid_files:
                             ext = os.path.splitext(item.filename)[1]
                             dest = os.path.join(proj_dir, f"{index}{ext}")
                             with open(dest, 'wb') as f:

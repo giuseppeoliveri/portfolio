@@ -44,7 +44,6 @@ header {
 }
 
 /* The sliding background pill */
-/* The sliding background pill */
 .nav-background {
   position: absolute;
   background: rgba(255, 255, 255, 0.15);
@@ -650,11 +649,14 @@ header {
   font-size: 0.9rem;
   font-weight: 400;
   letter-spacing: 0.05em;
-  pointer-events: auto; /* Changed to auto so it can be clicked */
-  cursor: pointer; /* Suggest it is clickable */
+  pointer-events: auto;
+  /* Changed to auto so it can be clicked */
+  cursor: pointer;
+  /* Suggest it is clickable */
 
   opacity: 0;
-  transition: all 0.3s ease; /* changed from opacity 0.5s to all 0.3s to support hover scale */
+  transition: all 0.3s ease;
+  /* changed from opacity 0.5s to all 0.3s to support hover scale */
 }
 
 .file-display:hover {
@@ -676,7 +678,8 @@ body.light-mode .file-display:hover {
 /* Mobile adjustments */
 @media (max-width: 576px) {
   .file-display {
-    top: 27px;    /* matches center of eye icon and lightbulb (43px) */
+    top: 27px;
+    /* matches center of eye icon and lightbulb (43px) */
     bottom: auto;
     font-size: 0.8rem;
     padding: 0.4rem 1.2rem;
@@ -691,43 +694,6 @@ body.light-mode .file-display:hover {
     padding: 0;
   }
 
-  #onlineCounter {
-    top: 25px;
-    left: 15px;
-    height: 36px;
-    min-width: 36px;
-    padding: 0 10px;
-    font-size: 0.85rem;
-    gap: 5px;
-    justify-content: center;
-  }
-
-  /* On mobile: never expand text on hover — only on tap via JS */
-  #onlineCounter .counter-hover-text {
-    display: none;
-  }
-
-  /* Tap tooltip badge */
-  #counterTapLabel {
-    display: block;
-    position: fixed;
-    top: 68px;
-    left: 15px;
-    background: rgba(0,0,0,0.75);
-    color: #fff;
-    font-size: 0.75rem;
-    padding: 4px 12px;
-    border-radius: 20px;
-    z-index: 1060;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-    white-space: nowrap;
-  }
-
-  #counterTapLabel.visible {
-    opacity: 1;
-  }
 }
 
 /* === LIGHT MODE OVERRIDES === */
@@ -840,29 +806,29 @@ body.light-mode .btn-close-white {
 }
 
 #themeToggleBtn {
-  position: fixed; 
-  top: 20px; 
-  right: 20px; 
-  z-index: 1050; 
-  cursor: pointer; 
-  background: rgba(0,0,0,0.5); 
-  backdrop-filter: blur(10px); 
-  -webkit-backdrop-filter: blur(10px); 
-  padding: 10px; 
-  border-radius: 50%; 
-  border: 1px solid rgba(255,255,255,0.1); 
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  width: 44px; 
-  height: 44px; 
-  color: #fff; 
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1050;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 10px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  color: #fff;
   transition: all 0.3s ease;
 }
 
 body.light-mode #themeToggleBtn {
-  background: rgba(255,255,255,0.8);
-  border: 1px solid rgba(0,0,0,0.1);
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   color: #000;
 }
 
@@ -877,82 +843,4 @@ body.light-mode #themeToggleBtn:hover {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
   background: rgba(255, 255, 255, 1);
   border-color: rgba(0, 0, 0, 0.3);
-}
-
-/* Hidden by default — shown only on mobile tap */
-#counterTapLabel {
-  display: none;
-}
-
-/* === ONLINE COUNTER === */
-#onlineCounter {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  z-index: 1050;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(0,0,0,0.5);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  padding: 0 15px;
-  height: 44px;
-  border-radius: 50px;
-  border: 1px solid rgba(255,255,255,0.1);
-  color: #ffffff;
-  font-size: 0.9rem;
-  font-weight: 400;
-  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-  pointer-events: auto;
-  cursor: default;
-  overflow: hidden;
-}
-
-#onlineCounter:hover {
-  background: rgba(0,0,0,0.7);
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-}
-
-body.light-mode #onlineCounter:hover {
-  background: rgba(255,255,255,1);
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
-}
-
-.counter-hover-text {
-  max-width: 0;
-  opacity: 0;
-  white-space: nowrap;
-  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-  font-size: 0.85rem;
-  line-height: 1;
-}
-
-#onlineCounter:hover .counter-hover-text {
-  max-width: 120px;
-  opacity: 1;
-  margin-left: 2px;
-}
-
-body.light-mode #onlineCounter {
-  background: rgba(255,255,255,0.8);
-  border: 1px solid rgba(0,0,0,0.1);
-  color: #000000;
-}
-
-.blinking-icon {
-  animation: blink-green 3s infinite ease-in-out;
-}
-
-@keyframes blink-green {
-  0%, 100% { 
-    opacity: 1; 
-    stroke: #28a745; 
-    filter: drop-shadow(0 0 3px rgba(40, 167, 69, 0.8)); 
-  }
-  50% { 
-    opacity: 0.5; 
-    stroke: #28a745; 
-    filter: drop-shadow(0 0 0px rgba(40, 167, 69, 0)); 
-  }
 }
