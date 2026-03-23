@@ -119,11 +119,82 @@ document.addEventListener('DOMContentLoaded', () => {
         // Add click integration to open modal
         fileDisplay.onclick = function(e) {
             e.preventDefault();
-            const originalSrc = media.getAttribute('src');
+            const originalSrc = media.getAttribute('data-original-src') || src;
             if (typeof openProjectDetails === 'function') {
                 openProjectDetails(cleanName, originalSrc);
             }
         };
+        
+        // Make media background clickable too
+        media.style.cursor = 'pointer';
+        media.onclick = function(e) {
+            e.preventDefault();
+            const originalSrc = media.getAttribute('data-original-src') || src;
+            if (typeof openProjectDetails === 'function') {
+                openProjectDetails(cleanName, originalSrc);
+            }
+        };
+
+        // --- SLIDESHOW LOGIC per sole immagini ---
+        if (window.currentSlideshowInterval) {
+            clearInterval(window.currentSlideshowInterval);
+            window.currentSlideshowInterval = null;
+        }
+        
+        media.style.transition = 'opacity 0.4s ease';
+        media.style.opacity = '1';
+
+        if (media.tagName === 'IMG') {
+            if (!media.getAttribute('data-original-src')) {
+                media.setAttribute('data-original-src', src);
+            }
+            const originalSrc = media.getAttribute('data-original-src');
+            
+            let galleryImages = [originalSrc];
+            let searchIndex = 1;
+            let extTry = ['.jpg', '.jpeg', '.png'];
+            
+            let extStep = 0;
+            let stopSearch = false;
+            
+            function pushExtraImage() {
+                if (stopSearch || searchIndex > 15) return;
+                const tempImg = new Image();
+                const testUrl = () => {
+                    tempImg.src = `progetti/${encodeURIComponent(cleanName)}/${searchIndex}${extTry[extStep]}`;
+                };
+                
+                tempImg.onload = () => {
+                    galleryImages.push(tempImg.src);
+                    searchIndex++;
+                    extStep = 0;
+                    pushExtraImage();
+                };
+                tempImg.onerror = () => {
+                    extStep++;
+                    if (extStep >= extTry.length) {
+                        stopSearch = true; 
+                    } else {
+                        testUrl();
+                    }
+                };
+                testUrl();
+            }
+            
+            pushExtraImage(); 
+            
+            let showIndex = 0;
+            window.currentSlideshowInterval = setInterval(() => {
+                if (galleryImages.length > 1) {
+                    showIndex = (showIndex + 1) % galleryImages.length;
+                    media.style.opacity = '0.3'; 
+                    setTimeout(() => {
+                        media.src = galleryImages[showIndex];
+                        media.style.opacity = '1';
+                    }, 400); 
+                }
+            }, 3000);
+        }
     }
 
     // Initial update
