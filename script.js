@@ -363,7 +363,7 @@ function openProjectDetails(title, originalSrc) {
     
     const contentDiv = document.getElementById('projectDetailsContent');
     contentDiv.innerHTML = `
-      <h2 class="display-6 fw-bold mb-4">${title}</h2>
+      <h2 style="font-family: var(--font); font-size: 1rem; font-weight: 400; letter-spacing: 0.03em; margin-bottom: 1.5rem;">${title}</h2>
       <div id="projectDetailsText" class="mb-4 text-start"></div>
       <div id="projectDetailsMedia" class="d-flex flex-column gap-3 align-items-center">
         <!-- Display original image/video as fallback or cover -->
@@ -379,10 +379,10 @@ function openProjectDetails(title, originalSrc) {
             return res.text();
         })
         .then(text => {
-            document.getElementById('projectDetailsText').innerHTML = `<p style="font-size: 1.1rem; line-height: 1.6;">${text}</p>`;
+            document.getElementById('projectDetailsText').innerHTML = `<p style="font-family: var(--font); font-size: 1rem; font-weight: 400; letter-spacing: 0.03em; line-height: 1.6;">${text}</p>`;
         })
         .catch(() => {
-            document.getElementById('projectDetailsText').innerHTML = `<p class="text-muted">Nessuna informazione aggiuntiva trovata qui, crea un file testo.txt nella cartella "progetti/${title}/" per aggiungere testo.</p>`;
+            document.getElementById('projectDetailsText').innerHTML = `<p class="text-muted" style="font-family: var(--font); font-size: 1rem; font-weight: 400; letter-spacing: 0.03em;">Nessuna informazione aggiuntiva trovata qui, crea un file testo.txt nella cartella "progetti/${title}/" per aggiungere testo.</p>`;
         });
         
     // Sequential fallback media loader for 1.jpg to X.jpg / .mp4
