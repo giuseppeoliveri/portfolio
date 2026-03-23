@@ -379,10 +379,10 @@ function openProjectDetails(title, originalSrc) {
             return res.text();
         })
         .then(text => {
-            document.getElementById('projectDetailsText').innerHTML = `<p style="font-family: var(--font); font-size: 1rem; font-weight: 400; letter-spacing: 0.03em; line-height: 1.6;">${text}</p>`;
+            document.getElementById('projectDetailsText').innerHTML = `<p style="font-family: var(--font); font-size: 1rem; font-weight: 400; letter-spacing: 0.03em; line-height: 1.6; white-space: pre-wrap;">${text}</p>`;
         })
         .catch(() => {
-            document.getElementById('projectDetailsText').innerHTML = `<p class="text-muted" style="font-family: var(--font); font-size: 1rem; font-weight: 400; letter-spacing: 0.03em;">Nessuna informazione aggiuntiva trovata qui, crea un file testo.txt nella cartella "progetti/${title}/" per aggiungere testo.</p>`;
+            document.getElementById('projectDetailsText').innerHTML = `<p class="text-muted" style="font-family: var(--font); font-size: 1rem; font-weight: 400; letter-spacing: 0.03em; white-space: pre-wrap;">Nessuna informazione aggiuntiva trovata qui, crea un file testo.txt nella cartella "progetti/${title}/" per aggiungere testo.</p>`;
         });
         
     // Sequential fallback media loader for 1.jpg to X.jpg / .mp4
