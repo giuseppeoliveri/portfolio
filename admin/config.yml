@@ -1,0 +1,36 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "immagini"
+public_folder: "immagini"
+
+collections:
+  - name: "content"
+    label: "Contenuto Sito"
+    delete: false
+    editor:
+      preview: false
+    files:
+      - name: "projects_collection"
+        label: "Lista Progetti"
+        file: "projects.json"
+        description: "Gestisci tutti i progetti del tuo sito portfolio da qui. Puoi ordinarli trascinandoli."
+        fields:
+          - label: "Progetti"
+            name: "projects"
+            widget: "list"
+            summary: "{{fields.title}} ({{fields.category}})"
+            fields:
+              - { label: "Slug / ID Progetto (es: olivetti-posters)", name: "id", widget: "string", pattern: ["^[a-z0-9-]+$", "Lo slug deve contenere solo lettere minuscole, numeri e trattini (es: palazzo-strozzi)."], hint: "Questo identifica il progetto internamente. Usa solo lettere minuscole, numeri e trattini." }
+              - { label: "Titolo Progetto", name: "title", widget: "string" }
+              - { label: "Categoria", name: "category", widget: "select", options: ["Visual Identity", "Motion Design", "Book Design", "Illustration"] }
+              - { label: "Media Principale (Copertina)", name: "main_media", widget: "file" }
+              - { label: "Bio Progetto (Sottotitolo/Evidenza)", name: "bio", widget: "string", required: false, hint: "Una breve bio o frase d'effetto per il progetto." }
+              - { label: "Descrizione Dettagliata", name: "description", widget: "text", required: false, hint: "Il testo completo che verrà visualizzato nella modale." }
+              - label: "Extra Media (Galleria Modale)"
+                name: "extra_media"
+                widget: "list"
+                required: false
+                summary: "{{fields.media}}"
+                field: { label: "File Media (Immagine o Video)", name: "media", widget: "file" }
