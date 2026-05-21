@@ -8,6 +8,37 @@
       "bio": "Questa è una biografia breve per il tuo progetto demo di prova.",
       "description": "Questa è una descrizione dettagliata del progetto demo. Puoi cambiarla o eliminare questo progetto quando caricherai i tuoi veri lavori tramite il pannello di controllo.",
       "extra_media": []
+    },
+    {
+      "id": "ruffolo",
+      "title": "Sergio Ruffolo - Dal segno al movimento",
+      "category": "Book Design",
+      "main_media": "immagini/ruffolo_-0.webp",
+      "extra_media": [
+        "immagini/ruffolo_-1.webp",
+        "immagini/ruffolo_-2.webp",
+        "immagini/ruffolo_-3.webp",
+        "immagini/ruffolo_-4.webp",
+        "immagini/ruffolo_-5.webp",
+        "immagini/ruffolo_-6.webp",
+        "immagini/ruffolo_-7.webp",
+        "immagini/ruffolo_-9.webp",
+        "immagini/ruffolo_-10.webp",
+        "immagini/ruffolo_-11.webp",
+        "immagini/ruffolo_-12.webp",
+        "immagini/ruffolo_-13.webp",
+        "immagini/ruffolo_-14.webp",
+        "immagini/ruffolo_-15.webp",
+        "immagini/ruffolo_-16.webp",
+        "immagini/ruffolo_-17.webp",
+        "immagini/ruffolo_-18.webp",
+        "immagini/ruffolo_-19.webp",
+        "immagini/ruffolo_-20.webp",
+        "immagini/ruffolo_-21.webp",
+        "immagini/ruffolo_-23.webp"
+      ],
+      "bio": "Master's degree Thesis",
+      "description": "The objective of this thesis is to analyze and illustrate the work of Sergio Ruffolo, a multifaceted figure in the Italian creative landscape who seamlessly navigated the realms of graphic design, illustration, and fine arts. Throughout his extensive career, he proved to be a pioneer, anticipating contemporary trends through his social engagement and his radical innovation within the publishing industry.\n\nAs an early innovator in the field of motion design, Ruffolo revolutionized television graphics, collaborating closely with the leading corporations and key political figures of the era. \n\nThe core of this investigative work involved an accurate selection of materials housed at the AIAP Archive in Milan. During this phase, the opening of dozens of boxes previously donated by his son, revealed an unpublished heritage: Olivetti Synthesis folders filled with original prints and sketches, photocomposition materials and hand drawn logos, photographs, and handcrafted mockups.\n\nThis research is a methodical selection intended to define the stylistic identity Ruffolo maintained \nover decades. The goal is to transform it into a tangible source of inspiration for new generations of designers and illustrators.\n\nTutor: Silvana Amato\n"
     }
   ]
 }
