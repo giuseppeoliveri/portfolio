@@ -1,15 +1,6 @@
 {
   "projects": [
     {
-      "id": "progetto-demo",
-      "title": "Progetto Demo",
-      "category": "Visual Identity",
-      "main_media": "favicon.svg",
-      "bio": "Questa è una biografia breve per il tuo progetto demo di prova.",
-      "description": "Questa è una descrizione dettagliata del progetto demo. Puoi cambiarla o eliminare questo progetto quando caricherai i tuoi veri lavori tramite il pannello di controllo.",
-      "extra_media": []
-    },
-    {
       "id": "ruffolo",
       "title": "Sergio Ruffolo - Dal segno al movimento",
       "category": "Book Design",
