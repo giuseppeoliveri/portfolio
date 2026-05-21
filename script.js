@@ -365,13 +365,13 @@ function openProjectDetails(project) {
     // Clean and build modal content with custom styling for Bio and Description
     contentDiv.innerHTML = `
       <div class="pe-4 text-start">
-        <h2 style="font-family: var(--font); font-size: 1.5rem; font-weight: 500; letter-spacing: 0.01em; margin-bottom: 0.5rem; color: #fff;">${project.title}</h2>
+        <h2 style="font-family: var(--font); font-size: 1.5rem; font-weight: 500; letter-spacing: 0.01em; margin-bottom: 0.5rem;">${project.title}</h2>
         <span class="badge bg-secondary-subtle text-secondary-emphasis mb-4 px-3 py-2 rounded-pill" style="font-size: 0.8rem; letter-spacing: 0.05em; text-transform: uppercase;">${project.category}</span>
         
         <!-- Biography Section (New Premium Feature) -->
         ${project.bio ? `
-        <div class="project-bio-box mb-4 p-4 rounded-4" style="background: rgba(255,255,255,0.04); border-left: 4px solid var(--text-color); backdrop-filter: blur(10px);">
-          <p class="m-0" style="font-family: var(--font); font-size: 1.05rem; font-weight: 400; font-style: italic; line-height: 1.6; color: rgba(255,255,255,0.9); letter-spacing: 0.02em;">
+        <div class="project-bio-box mb-4 p-4 rounded-4" style="background: rgba(128,128,128,0.1); border-left: 4px solid currentColor; backdrop-filter: blur(10px);">
+          <p class="m-0" style="font-family: var(--font); font-size: 1.05rem; font-weight: 400; font-style: italic; line-height: 1.6; opacity: 0.9; letter-spacing: 0.02em;">
             "${project.bio}"
           </p>
         </div>
@@ -380,7 +380,7 @@ function openProjectDetails(project) {
         <!-- Description Section -->
         ${project.description ? `
         <div class="project-description-box mb-5">
-          <p style="font-family: var(--font); font-size: 0.95rem; font-weight: 400; letter-spacing: 0.02em; line-height: 1.7; white-space: pre-wrap; color: rgba(255,255,255,0.7);">
+          <p style="font-family: var(--font); font-size: 0.95rem; font-weight: 400; letter-spacing: 0.02em; line-height: 1.7; white-space: pre-wrap; opacity: 0.8;">
             ${project.description}
           </p>
         </div>
@@ -406,11 +406,11 @@ function openProjectDetails(project) {
             const ext = url.split('.').pop().toLowerCase();
             if (['mp4', 'webm', 'mov'].includes(ext)) {
                 mediaContainer.innerHTML += `
-                    <video class="w-100 rounded-4 shadow-lg border border-dark-subtle" src="${url}" controls autoplay muted loop style="max-height: 60vh; background-color:#000;"></video>
+                    <video class="zoomable-media w-100 rounded-4 shadow-lg border border-dark-subtle" src="${url}" controls autoplay muted loop style="max-height: 60vh; background-color:#000;"></video>
                 `;
             } else {
                 mediaContainer.innerHTML += `
-                    <img class="w-100 rounded-4 shadow-lg border border-dark-subtle" src="${url}" alt="${project.title}" style="max-height: 75vh; object-fit: contain; background-color:#000;">
+                    <img class="zoomable-media w-100 rounded-4 shadow-lg border border-dark-subtle" src="${url}" alt="${project.title}" style="max-height: 75vh; object-fit: contain; background-color:#000;">
                 `;
             }
         });
@@ -419,14 +419,22 @@ function openProjectDetails(project) {
         const ext = project.main_media.split('.').pop().toLowerCase();
         if (['mp4', 'webm', 'mov'].includes(ext)) {
             mediaContainer.innerHTML += `
-                <video class="w-100 rounded-4 shadow-lg border border-dark-subtle" src="${project.main_media}" controls autoplay muted loop style="max-height: 60vh; background-color:#000;"></video>
+                <video class="zoomable-media w-100 rounded-4 shadow-lg border border-dark-subtle" src="${project.main_media}" controls autoplay muted loop style="max-height: 60vh; background-color:#000;"></video>
             `;
         } else {
             mediaContainer.innerHTML += `
-                <img class="w-100 rounded-4 shadow-lg border border-dark-subtle" src="${project.main_media}" alt="${project.title}" style="max-height: 75vh; object-fit: contain; background-color:#000;">
+                <img class="zoomable-media w-100 rounded-4 shadow-lg border border-dark-subtle" src="${project.main_media}" alt="${project.title}" style="max-height: 75vh; object-fit: contain; background-color:#000;">
             `;
         }
     }
+    
+    // Attach click listeners for zoom functionality
+    const mediaElements = mediaContainer.querySelectorAll('.zoomable-media');
+    mediaElements.forEach(el => {
+        el.addEventListener('click', function(e) {
+            this.classList.toggle('media-zoomed');
+        });
+    });
 }
 
 // Theme Toggle Logic

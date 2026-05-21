@@ -703,6 +703,11 @@ body.light-mode .file-display:hover {
 body.light-mode {
   --bg: #ffffff;
   --text: #000000;
+  --bs-body-color: #000000;
+  --bs-body-bg: #ffffff;
+  --bs-heading-color: #000000;
+  --bs-modal-color: #000000;
+  --bs-modal-bg: #ffffff;
 }
 
 body.light-mode .pill-nav {
@@ -731,6 +736,30 @@ body.light-mode #categoryFilterNav .pill-nav-item.active {
 body.light-mode .about-modal-content {
   background: #ffffff;
   color: #000000;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+body.light-mode .about-modal-content h2,
+body.light-mode .about-modal-content p,
+body.light-mode .about-modal-content span:not(.badge),
+body.light-mode .about-modal-content a:not(.linkedin-btn),
+body.light-mode #projectDetailsContent,
+body.light-mode #projectDetailsContent h2,
+body.light-mode #projectDetailsContent p,
+body.light-mode #projectDetailsContent div,
+body.light-mode #projectDetailsContent span:not(.badge) {
+  color: #000000 !important;
+}
+
+body.light-mode .about-modal-content .btn-close-white {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  filter: invert(1) !important;
+  opacity: 0.8;
+}
+
+body.light-mode .about-modal-content .btn-close-white:hover {
+  opacity: 1;
 }
 
 body.light-mode .carousel-control-prev,
@@ -846,4 +875,27 @@ body.light-mode #themeToggleBtn:hover {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
   background: rgba(255, 255, 255, 1);
   border-color: rgba(0, 0, 0, 0.3);
+}
+
+/* === MEDIA ZOOM === */
+.zoomable-media {
+  cursor: zoom-in;
+  transition: transform 0.3s ease, border-radius 0.3s ease, box-shadow 0.3s ease;
+}
+
+.media-zoomed {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: 90vw !important;
+  height: 90vh !important;
+  max-height: 90vh !important;
+  max-width: 90vw !important;
+  z-index: 3000 !important;
+  object-fit: contain !important;
+  background-color: rgba(0, 0, 0, 0.95) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 0 0 100vw rgba(0, 0, 0, 0.85) !important;
+  cursor: zoom-out !important;
 }
